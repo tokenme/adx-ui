@@ -1,0 +1,7 @@
+{
+  "importScripts": [
+    "sw-toolbox.js",
+    "runtime-caching.js"
+  ],
+  "verbose": true
+}
