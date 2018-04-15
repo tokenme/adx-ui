@@ -12,8 +12,8 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const url = require('url');
 
-//const PUBLIC_PATH = 'https://dq7xb1ewqq8wi.cloudfront.net/';
-const PUBLIC_PATH = 'https://static.tianxi100.com/'
+//const PUBLIC_PATH = 'https://static.tianxi100.com/'
+const PUBLIC_PATH = '';
 const PROJECT_NAME = 'tokemama.io';
 const OUTPUT_DIR = 'build/dist';
 
@@ -21,21 +21,19 @@ module.exports = (options = {}) => ({
   entry: {
     //'common-vendor': './src/common-vendor',
     //vendor: './src/vendor',
-    index: './src/main.js',
-    promo: './src/promo.js',
-    'red-packet': './src/rp.js'
+    media: './src/media.js',
+    adx: './src/adx.js'
   },
   externals: {
     'axios': 'axios',
     'vue': 'Vue',
-    'vuetify': 'Vuetify',
+    'vuex': 'Vuex',
+    'iview': 'iview',
     'vue-router': 'VueRouter',
     'vue-i18n': 'VueI18n',
     'vue-clipboard2': 'VueClipboard',
-    'vue-social-sharing': 'SocialSharing',
     'vue-chartjs': 'VueChartJs',
-    'moment': 'moment',
-    'v-qrcode': 'VQrcode'
+    'moment': 'moment'
   },
   output: {
     path: resolve(__dirname, OUTPUT_DIR),
@@ -135,18 +133,14 @@ module.exports = (options = {}) => ({
       defaultAttribute: 'defer'
     }), 
     new HtmlWebpackPlugin({
-      template: 'src/promo.html',
-      filename: 'promo.html',
-      chunks: [ 'promo']
+      template: 'src/adx.html',
+      filename: 'adx.html',
+      chunks: [ 'adx']
     }),
     new HtmlWebpackPlugin({
-      template: 'src/rp.html',
-      filename: 'rp.html',
-      chunks: [ 'red-packet']
-    }),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      chunks: [ 'index']
+      template: 'src/media.html',
+      filename: 'media.html',
+      chunks: [ 'media']
     }),
     new webpack.LoaderOptionsPlugin({
        minimize: true,
