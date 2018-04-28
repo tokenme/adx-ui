@@ -22,7 +22,8 @@ module.exports = (options = {}) => ({
     //'common-vendor': './src/common-vendor',
     //vendor: './src/vendor',
     media: './src/media.js',
-    adx: './src/adx.js'
+    adx: './src/adx.js',
+    tmm: './src/tmm.js'
   },
   externals: {
     'axios': 'axios',
@@ -33,6 +34,9 @@ module.exports = (options = {}) => ({
     'vue-i18n': 'VueI18n',
     'vue-clipboard2': 'VueClipboard',
     'vue-chartjs': 'VueChartJs',
+    'vue-context-menu': 'VueContextMenu',
+    'vue-calendar': 'vueCalendar',
+    '_': 'lodash',
     'moment': 'moment'
   },
   output: {
@@ -78,11 +82,11 @@ module.exports = (options = {}) => ({
       },
       {
         test:  /\.scss$/,
-        use:  ["style!css!sass"]
+        use:  ExtractTextPlugin.extract({fallback:'style-loader', use:['style-loader', 'css-loader', 'sass-loader']})
       },
       {
         test:  /\.less$/,
-        use:  ['style-loader', 'css-loader', 'less-loader']
+        use:  ExtractTextPlugin.extract({fallback:'style-loader', use:['style-loader', 'css-loader', 'less-loader']})
       },
       {
         test: /\.css$/,

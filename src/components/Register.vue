@@ -102,7 +102,13 @@
             }
             this.$store.dispatch(types.REGISTER_REQUEST, payload).then(res => {
               this.loading = false
-              this.$router.push({name: 'login'})
+              this.$Modal.success({
+                title: 'Success',
+                content: '<p>Activation email has been sent, please check your mailbox.</p>',
+                onOk: () => {
+                  this.$router.push({name: 'login'})
+                }
+              })
             }, err => {
               this.loading = false
               if (err.code && err.code === 502) {
@@ -120,7 +126,7 @@
                       this.$Message.error(err.message || 'unknown error')
                     })
                   }
-                });
+                })
               } else {
                 this.$Modal.error({title: 'Error', content: err.message ? err.message : 'unknown error'})
               }

@@ -1,0 +1,37 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Tokenmama",
+  "scope": "https://adx.tokenmama.io",
+  "display": "standalone",
+  "start_url": "https://adx.tokenmama.io",
+  "short_name": "Tokenmama",
+  "theme_color": "#fff",
+  "description": "免费的全链路区块链营销套件, 解决你的燃眉之急,抢占市场先机。空投、发糖、红包、投票，你想要的都在这里。",
+  "orientation": "portrait",
+  "background_color": "transparent",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "https://adxcdn.tokenmama.io/img/logo/apple-touch-icon-114x114-precomposed.png",
+      "type": "image/png",
+      "sizes": "114x114"
+    },
+    {
+      "src": "https://adxcdn.tokenmama.io/img/logo/apple-touch-icon-128x128-precomposed.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "https://adxcdn.tokenmama.io/img/logo/apple-touch-icon-192x192-precomposed.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://adxcdn.tokenmama.io/img/logo/apple-touch-icon-512x512-precomposed.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

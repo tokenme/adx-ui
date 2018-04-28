@@ -2,7 +2,7 @@ import Vue from 'vue'
 import iview from 'iview'
 import VueRouter from 'vue-router'
 import VueClipboard from 'vue-clipboard2'
-import vuelidate from 'vuelidate'
+import vueCalendar from 'vue-calendar'
 import gtagjs from 'vue-gtagjs'
 import './css/common.css'
 
@@ -10,8 +10,10 @@ import App from './Media.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import ResetPassword from './components/ResetPassword.vue'
-import Dashboard from './components/Dashboard.vue'
-import Media from './components/Media.vue'
+import Dashboard from './components/media/Dashboard.vue'
+import Account from './components/media/Account.vue'
+import Media from './components/media/Media.vue'
+import PrivateAuction from './components/media/PrivateAuction.vue'
 import store from './store'
 import * as types from './store/mutation-types'
 
@@ -20,7 +22,7 @@ iview.lang('en-US')
 Vue.use(iview)
 Vue.use(VueRouter)
 Vue.use(VueClipboard)
-Vue.use(vuelidate)
+Vue.use(vueCalendar)
 
 const router = new VueRouter({
   routes: [{
@@ -53,11 +55,32 @@ const router = new VueRouter({
       auth: true
     }
   }, {
+    name: 'account',
+    path: '/account',
+    component: Account,
+    meta: {
+      title: 'account',
+      auth: true
+    }
+  }, {
     name: 'media',
     path: '/media/:id',
     component: Media,
     meta: {
       title: 'media',
+      auth: true
+    }
+  }, {
+    name: 'auctions',
+    path: '/private-auctions',
+    component: PrivateAuction,
+    props: (route) => ({ 
+      mediaId: route.query.media_id,
+      adzoneId: route.query.adzone_id,
+      auctionId: route.query.auction_id 
+    }),
+    meta: {
+      title: 'auctions',
       auth: true
     }
   }],

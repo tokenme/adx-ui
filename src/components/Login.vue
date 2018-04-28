@@ -70,6 +70,9 @@
         }
       }
     },
+    props: {
+      redirect: null
+    },
     methods: {
       onSubmit() {
         this.$refs.loginForm.validate((valid) => {
@@ -83,10 +86,14 @@
             }
             this.$store.dispatch(types.LOGIN_REQUEST, payload).then(res => {
               this.loading = false
-              this.$router.push({name: 'dashboard'})
+              let redirect = '/'
+              if (this.redirect) {
+                redirect = this.redirect
+              }
+              this.$router.push({path: redirect})
             }, err => {
               this.loading = false
-              this.$Modal.error({title: 'Error', content: err.msg ? err.msg : 'unknown error'})
+              this.$Modal.error({title: 'Error', content: err.message ? err.message : 'unknown error'})
             })
           }
         })

@@ -3,7 +3,7 @@
     <Menu mode="horizontal" theme="dark" :active-name="currentRoute" @on-select="onMenuSelect">
       <Row type="flex" justify="space-between" align="middle">
         <Col>
-          <div class="layout-logo"></div>
+          <img src="https://adxcdn.tokenmama.io/img/logo/red-300.png?v=20180427" class="layout-logo"/>
         </Col>
         <Col>
           <MenuItem :name="item.route" v-for="item of menuItems" :key="item.route">
@@ -36,7 +36,7 @@
       return {
         menuItems: [
           {icon: 'ios-speedometer-outline', name: 'Dashboard', route: 'dashboard', path: '/'},
-          {icon: 'android-locate', name: 'Adzones', route: 'adzones', path: '/adzones'}
+          {icon: 'ios-cart', name: 'Auctions', route: 'auctions', path: '/private-auctions'}
         ]
       }
     },
@@ -61,13 +61,25 @@
           this.logout()
           return
         }
+        if (name === 'login') {
+          this.$router.push({
+            path: '/login'
+          })
+          return
+        }
+        if (name === 'account') {
+          this.$router.push({
+            path: '/account'
+          })
+          return
+        }
         for (const item of this.menuItems) {
-          if (item.name === name) {
+          if (item.route === name) {
             this.$router.push({
               path: item.path
             })
+            break
           }
-          return
         }
       },
       logout() {

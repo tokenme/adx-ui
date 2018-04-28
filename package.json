@@ -35,6 +35,8 @@
     "postcss-loader": "^2.0.6",
     "less": "^2.7.3",
     "less-loader": "^2.2.3",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^7.0.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "eslint": "^4.4.0",
     "eslint-config-enough": "^0.2.2",
@@ -57,6 +59,7 @@
     "vuelidate": "^0.5.0",
     "axios": "^0.16.2",
     "vue-clipboard2": "^v0.0.8",
+    "vue2-simple-calendar": "^1.0.6",
     "chart.js": "^2.7.1",
     "vue-chartjs": "^3.2.1",
     "vue-gtagjs": "^1.0.7",
@@ -67,6 +70,7 @@
     "script-ext-html-webpack-plugin": "^1.8.8",
     "webpack-dev-server": "^2.6.1",
     "sw-precache": "^5.2.1",
-    "sw-toolbox": "^3.6.0"
+    "sw-toolbox": "^3.6.0",
+    "adlibs": "^2.1.1"
   }
 }

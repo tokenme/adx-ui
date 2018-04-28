@@ -1,37 +1,114 @@
 import Vue from 'vue'
-import iView from 'iview'
+import iview from 'iview'
 import VueRouter from 'vue-router'
 import VueClipboard from 'vue-clipboard2'
-import Vuelidate from 'vuelidate'
+import vueCalendar from 'vue-calendar'
 import gtagjs from 'vue-gtagjs'
+import './css/common.css'
 
-import App from './Media.vue'
+import App from './Adx.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import ResetPassword from './components/ResetPassword.vue'
+import Dashboard from './components/adx/Dashboard.vue'
+import PrivateAuction from './components/adx/PrivateAuction.vue'
+import PrivateAuctionStats from './components/adx/PrivateAuctionStats.vue'
+import Media from './components/adx/Media.vue'
+import Adzone from './components/adx/Adzone.vue'
+import Account from './components/adx/Account.vue'
 import store from './store'
 import * as types from './store/mutation-types'
 
-Vue.use(iView)
+iview.lang('en-US')
+
+Vue.use(iview)
 Vue.use(VueRouter)
 Vue.use(VueClipboard)
-Vue.use(Vuelidate)
+Vue.use(vueCalendar)
 
 const router = new VueRouter({
   routes: [{
     name: 'login',
     path: '/login',
     component: Login,
+    props: (route) => ({
+      redirect: route.query.redirect
+    }),
     meta: {
-      title: 'login',
-      hideFooter: true
+      title: 'login'
     }
   }, {
     name: 'register',
     path: '/register',
     component: Register,
     meta: {
-      title: 'register',
-      hideFooter: true
+      title: 'register'
+    }
+  }, {
+    name: 'reset-passwd',
+    path: '/reset-passwd/:code',
+    component: ResetPassword,
+    meta: {
+      title: 'reset-passwd'
+    }
+  }, {
+    name: 'dashboard',
+    path: '/',
+    component: Dashboard,
+    meta: {
+      title: 'dashboard',
+      auth: true
+    }
+  }, {
+    name: 'account',
+    path: '/account',
+    component: Account,
+    meta: {
+      title: 'account',
+      auth: true
+    }
+  }, {
+    name: 'media',
+    path: '/media/:id',
+    component: Media,
+    meta: {
+      title: 'media',
+      auth: true
+    }
+  }, {
+    name: 'adzone',
+    path: '/adzone/:id',
+    component: Adzone,
+    meta: {
+      title: 'media',
+      auth: true
+    }
+  }, {
+    name: 'auctions',
+    path: '/private-auctions',
+    component: PrivateAuction,
+    props: (route) => ({
+      adzoneId: route.query.adzoneId,
+      mediaId: route.query.mediaId,
+      adzone: route.query.adzone ? JSON.parse(route.query.adzone) : null
+    }),
+    meta: {
+      title: 'auctions',
+      auth: true
+    }
+  }, {
+    name: 'auction-stats',
+    path: '/auction-stats/:id',
+    component: PrivateAuctionStats,
+    props: (route) => ({
+      auctionId: route.query.auctionId,
+      adzoneId: route.query.adzoneId,
+      mediaId: route.query.mediaId,
+      auction: route.query.auction ? JSON.parse(route.query.auction) : null
+    }),
+    meta: {
+      title: 'auction-stats',
+      auth: true
     }
   }],
   scrollBehavior (to, from, savedPosition) {
@@ -43,9 +120,10 @@ const router = new VueRouter({
   }
 })
 
-const GA_TRACKING_ID = 'UA-116680246-4'
+const GA_TRACKING_ID = 'UA-116680246-5'
 gtagjs(router, GA_TRACKING_ID)
 Vue.prototype.GA_TRACKING_ID = GA_TRACKING_ID
+Vue.prototype.$Site = 'adx'
 
 if (window.performance && window.gtag) {
   // Gets the number of milliseconds since page load
@@ -60,12 +138,13 @@ if (window.performance && window.gtag) {
   })
 }
 
-if (window.Raven) {
-  window.Raven.config('https://5403891267fd411e8399fa1958f144e3@sentry.io/1163629').install()
-}
+//if (window.Raven) {
+//  window.Raven.config('https://5403891267fd411e8399fa1958f144e3@sentry.io/1163629').install()
+//}
 
 router.beforeEach((to, from, next) => {
-  iView.LoadingBar.start()
+  iview.LoadingBar.start()
+  store.dispatch(types.UPDATE_BREADCRUMB, [])
   const runner = async() => {
     if (to.matched.some(record => record.meta.auth)) {
       try {
@@ -88,7 +167,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to) => {
-  iView.LoadingBar.finish()
+  iview.LoadingBar.finish()
   window.scrollTo(0, 0)
 });
 

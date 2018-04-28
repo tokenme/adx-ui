@@ -2,40 +2,19 @@
   <div class="layout">
     <Layout>
       <nav-header></nav-header>
-      <Layout>
-        <Sider hide-trigger :style="{background: '#fff'}">
-          <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
-            <Submenu name="1">
-              <template slot="title">
-                  <Icon type="ios-navigate"></Icon>
-                  Item 1
-              </template>
-              <MenuItem name="1-1">Option 1</MenuItem>
-              <MenuItem name="1-2">Option 2</MenuItem>
-              <MenuItem name="1-3">Option 3</MenuItem>
-            </Submenu>
-            <Submenu name="2">
-              <template slot="title">
-                  <Icon type="ios-keypad"></Icon>
-                  Item 2
-              </template>
-              <MenuItem name="2-1">Option 1</MenuItem>
-              <MenuItem name="2-2">Option 2</MenuItem>
-            </Submenu>
-            <Submenu name="3">
-              <template slot="title">
-                  <Icon type="ios-analytics"></Icon>
-                  Item 3
-              </template>
-              <MenuItem name="3-1">Option 1</MenuItem>
-              <MenuItem name="3-2">Option 2</MenuItem>
-            </Submenu>
-          </Menu>
-        </Sider>
-        <Layout :style="{padding: '0 24px 24px'}">
-          <router-view></router-view>
-        </Layout>
-      </Layout>
+      <Content :style="{padding: '0 50px'}">
+          <Breadcrumb :style="{margin: '20px 0'}" v-if="breadcrumb">
+              <BreadcrumbItem v-for="item of breadcrumb" :key="item.name" :to="item.path || ''">
+                {{ item.name }}
+              </BreadcrumbItem>
+          </Breadcrumb>
+          <Card>
+              <div style="min-height: 200px;">
+                  <router-view></router-view>
+              </div>
+          </Card>
+      </Content>
+      <Footer class="layout-footer-center">2018 &copy; Tokenmama.IO</Footer>
     </Layout>
   </div>
 </template>
@@ -46,6 +25,11 @@
   export default {
     components: {
       'nav-header': NavHeader
+    },
+    computed: {
+      breadcrumb() {
+        return this.$store.getters['breadcrumb']
+      }
     }
   }
 </script>
