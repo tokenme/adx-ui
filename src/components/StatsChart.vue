@@ -30,7 +30,7 @@
       <Spin size="large" fix v-if="spinShow"></Spin>
     </Card>
     <Row type="flex" justify="space-between" v-if="showStatsDetail">
-      <Col span="4">
+      <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
             Countries Stats
@@ -43,7 +43,7 @@
           <Spin size="large" fix v-if="countrySpinShow"></Spin>
         </Card>
       </Col>
-      <Col span="4">
+      <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
             Platforms Stats
@@ -56,7 +56,7 @@
           <Spin size="large" fix v-if="browserTypeSpinShow"></Spin>
         </Card>
       </Col>
-      <Col span="4">
+      <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
             OS Stats
@@ -69,7 +69,7 @@
           <Spin size="large" fix v-if="osSpinShow"></Spin>
         </Card>
       </Col>
-      <Col span="4">
+      <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
             Browsers Stats
@@ -209,7 +209,7 @@
         let dataSets = []
         if (data.length > 0) {
           dataSets = [
-            { label: this.chartSeries, backgroundColor: getRandomColor(), data: data }
+            { label: this.chartSeries, backgroundColor: '#2196F3', data: data }
           ]
         }
         return { labels: labels, datasets: dataSets }
@@ -258,7 +258,7 @@
         let dataSets = []
         if (data.length > 0) {
           dataSets = [
-            { label: this.chartSeries, backgroundColor: getRandomColor(), data: data }
+            { label: this.chartSeries, backgroundColor: '#2196F3', data: data }
           ]
         }
         return { labels: labels, datasets: dataSets }

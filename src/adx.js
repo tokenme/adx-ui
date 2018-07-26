@@ -16,6 +16,7 @@ import PrivateAuctionStats from './components/adx/PrivateAuctionStats.vue'
 import Media from './components/adx/Media.vue'
 import Adzone from './components/adx/Adzone.vue'
 import Account from './components/adx/Account.vue'
+import Airdrops from './components/adx/Airdrops.vue'
 import store from './store'
 import * as types from './store/mutation-types'
 
@@ -108,6 +109,14 @@ const router = new VueRouter({
     }),
     meta: {
       title: 'auction-stats',
+      auth: true
+    }
+  }, {
+    name: 'airdrops',
+    path: '/airdrops',
+    component: Airdrops,
+    meta: {
+      title: 'airdrops',
       auth: true
     }
   }],

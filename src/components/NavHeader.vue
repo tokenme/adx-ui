@@ -3,7 +3,7 @@
     <Menu mode="horizontal" theme="dark" :active-name="currentRoute" @on-select="onMenuSelect">
       <Row type="flex" justify="space-between" align="middle">
         <Col>
-          <img src="https://adxcdn.tokenmama.io/img/logo/red-300.png?v=20180427" class="layout-logo"/>
+          <img src="https://tmm-adx.tianxi100.com/img/logo/red-300.png?v=20180427" class="layout-logo"/>
         </Col>
         <Col>
           <MenuItem :name="item.route" v-for="item of menuItems" :key="item.route">
@@ -36,7 +36,8 @@
       return {
         menuItems: [
           {icon: 'ios-speedometer-outline', name: 'Dashboard', route: 'dashboard', path: '/'},
-          {icon: 'ios-cart', name: 'Auctions', route: 'auctions', path: '/private-auctions'}
+          {icon: 'ios-cart', name: 'Auctions', route: 'auctions', path: '/private-auctions'},
+          {icon: 'android-plane', name: 'Airdrops', route: 'airdrops', path: '/airdrops'}
         ]
       }
     },

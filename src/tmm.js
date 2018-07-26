@@ -50,7 +50,7 @@
       '&bw_name=' + browser.name +
       '&bw_ver=' + browser.version +
       '&bw_type=' + browserType;
-    const htm = '<body><style>*{margin:0;padding:0}.imp{width:1px;height:1px;display:absolute;top:-1px;;left:-1px;}.img{width:100%;height:100%}.logo{position:absolute;bottom:0;right:-4px;z-index:10000;}a img{width:20px;height16px;}a:hover.logo{right:0}</style><a href="https://adx.tokenmama.io" target="_blank" class="logo"><img src="https://adxcdn.tokenmama.io/img/logo/ad.png?v=20180428"></a><script src="https://adxcdn.tokenmama.io/js/tmm-c.js" type="text/javascript"></script><script src="' + link + '" type="text/javascript"></script></body>';
+    const htm = '<body><style>*{margin:0;padding:0}.imp{width:1px;height:1px;display:absolute;top:-1px;;left:-1px;}.img{width:100%;height:100%}.logo{position:absolute;bottom:0;right:-4px;z-index:10000;}a img{width:20px;height16px;}a:hover.logo{right:0}</style><a href="https://adx.tokenmama.io" target="_blank" class="logo"><img src="https://tmm-adx.tianxi100.com/img/logo/ad.png?v=20180428"></a><script src="https://tmm-adx.tianxi100.com/js/tmm-c.js" type="text/javascript"></script><script src="' + link + '" type="text/javascript"></script></body>';
     const ifrdom = ifr.contentWindow.document;
     ifrdom.open();
     ifrdom.write(htm);
