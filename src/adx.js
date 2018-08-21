@@ -18,15 +18,24 @@ import Adzone from './components/adx/Adzone.vue'
 import Account from './components/adx/Account.vue'
 import Airdrops from './components/adx/Airdrops.vue'
 import store from './store'
+import VueI18n from 'vue-i18n'
 import * as types from './store/mutation-types'
 
 iview.lang('en-US')
-
+Vue.use(VueI18n)
 Vue.use(iview)
 Vue.use(VueRouter)
 Vue.use(VueClipboard)
 Vue.use(vueCalendar)
 
+
+const i18n = new VueI18n({
+  locale: localStorage.lang ? localStorage.lang : 'en-US',
+  messages: {
+    'zh-CN': require('./locale/lang/zh.js'),
+    'en-US': require('./locale/lang/en.js')
+  }
+})
 const router = new VueRouter({
   routes: [{
     name: 'login',
@@ -186,6 +195,7 @@ try {
     el: '#app',
     router: router,
     store: store,
+    i18n,
     render: h => h(App)
   })
 } catch (e) {

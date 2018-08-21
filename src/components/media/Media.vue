@@ -2,24 +2,24 @@
   <div>
     <Modal
         v-model="showAddAdzone"
-        title="Add Adzone"
-        ok-text="Submit"
+        :title="this.$t('m.med.tit')"
+        :ok-text="this.$t('m.med.ok')"
         loading
         @on-ok="onAddAdzone">
         <AddAdzone ref="addAdzone" :media="media"></AddAdzone>
     </Modal>
     <Modal
         v-model="showEditMedia"
-        title="Edit Media"
-        ok-text="Submit"
+        :title="this.$t('m.med.ed')"
+        :ok-text="this.$t('m.med.ok')"
         loading
         @on-ok="onEditMedia">
         <EditMedia ref="editMedia" :media="media"></EditMedia>
     </Modal>
     <Modal
         v-model="showEditAdzone"
-        title="Edit Adzone"
-        ok-text="Submit"
+        :title="this.$t('m.med.ea')"
+        :ok-text="this.$t('m.med.ok')"
         loading
         @on-ok="onEditAdzone">
         <EditAdzone ref="editAdzone"></EditAdzone>
@@ -28,37 +28,37 @@
     <Card v-if="media" :bordered="false" :dis-hover="true" :shadow="false">
       <h2 slot="title">
         {{ media.title }}
-        <Tag color="red" v-if="media.verified===0">unverified</Tag>
-        <Tag color="yellow" v-else-if="media.online_status===0">offline</Tag>
-        <Tag color="green" v-else-if="media.online_status===1">online</Tag>
+        <Tag color="red" v-if="media.verified===0">{{$t('m.med.un')}}</Tag>
+        <Tag color="yellow" v-else-if="media.online_status===0">{{$t('m.med.off')}}</Tag>
+        <Tag color="green" v-else-if="media.online_status===1">{{$t('m.med.on')}}</Tag>
       </h2>
       <a slot="extra" :href="media.domain" target="_blank">
         <Icon type="link"></Icon>
         {{ media.domain }}
       </a>
       <Button slot="extra" type="primary" size="small" icon="edit" @click="showEditMedia=true" style="margin-left:5px">
-        Edit
+        {{$t('m.med.ei')}}
       </Button>
       <Button slot="extra" type="success" size="small" @click="onMediaVerify" v-if="media.verified===0" style="margin-left:5px">
-        Verify
+        {{$t('m.med.ver')}}
       </Button>
       <p>{{ media.desc }}</p>
     </Card>
     <StatsChart ref="statsChart" title="Media Stats" :media-id="mediaId" :height="300"></StatsChart>
     <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
       <p slot="title">
-        Adzone List
+        {{$t('m.med.al')}}
       </p>
       <Button slot="extra" type="primary" icon="ios-plus" @click="onShowAddAdzone">
-        Add Adzone
+        {{$t('m.med.aa')}}
       </Button>
       <p>
         <AdzoneTable ref="adzoneTable" :media="media" @adzoneEdit="onAdzoneEdit" v-if="media && adzones"></AdzoneTable>
         <Row type="flex" justify="center" v-else>
           <Col style="text-align:center">
-            <p style="padding:20px 0">No Adzones in the media, click the button below to add new adzone.</p>
+            <p style="padding:20px 0">{{$t('m.med.noAd')}}</p>
             <Button type="primary" icon="ios-plus" size="large" @click="onShowAddAdzone">
-              Add Adzone
+              {{$t('m.med.tit')}}
             </Button>
           </Col>
         </Row>
@@ -157,7 +157,7 @@
       onMediaVerifyFailed(err) {
         console.log(err)
         this.$refs.mediaVerifyModal.hide()
-        this.$Message.error('Verification Failed!')
+        this.$Message.error(this.$t('m.med.fail'))
       },
       onMediaVerify() {
         this.$refs.mediaVerifyModal.show()

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StatsChart ref="statsChart" title="Account Stats" :height="300"></StatsChart>
+    <StatsChart ref="statsChart" :title="this.$t('m.dashtit')" :height="300"></StatsChart>
     <AdzoneTable ref="adzoneTable" ></AdzoneTable>
   </div>
 </template>

@@ -40,7 +40,7 @@
             events.push({
               start: start.toDate(),
               end: end.toDate(),
-              title: 'unavailable'
+              title: this.$t('m.adZone.unavailable')
             })
             start = date
             end = date
@@ -52,7 +52,7 @@
           events.push({
             start: start.toDate(),
             end: end.toDate(),
-            title: 'unavailable'
+            title: this.$t('m.adZone.unavailable')
           })
         }
         return events

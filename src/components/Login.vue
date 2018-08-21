@@ -2,30 +2,30 @@
   <Row type="flex" justify="center">
     <Col :xs="24" :md="8">
       <Card style="margin-top:20px">
-        <p slot="title">Login</p>
+        <p slot="title">{{$t('m.login.log')}}</p>
         <p>
           <Form ref="loginForm" :model="loginForm" :rules="loginRule">
           <FormItem prop="email">
-            <Input type="text" v-model="loginForm.email" placeholder="Email">
+            <Input type="text" v-model="loginForm.email" :placeholder="this.$t('m.regis.place_email')">
               <Icon type="ios-email-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem prop="passwd">
-            <Input type="password" v-model="loginForm.passwd" placeholder="Password">
+            <Input type="password" v-model="loginForm.passwd" :placeholder="this.$t('m.regis.place_password')">
               <Icon type="ios-locked-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem>
             <Row type="flex" justify="center" :gutter="24">
               <Col>
-                <Button type="ghost" @click="gotoRegister">Register</Button>
+                <Button type="ghost" @click="gotoRegister">{{$t('m.login.reg')}}</Button>
               </Col>
               <Col>
-                <Button type="text" @click="resetPassword">Forget password?</Button>
+                <Button type="text" @click="resetPassword">{{$t('m.login.forgetPassword')}}</Button>
               </Col>
               <Col>
                 <Button type="primary" :loading="loading" :disabled="loading" @click="onSubmit">
-                  <span v-if="!loading">Login</span>
+                  <span v-if="!loading">{{$t('m.login.log')}}</span>
                   <span v-else>Loading...</span>
                 </Button>
               </Col>
@@ -46,9 +46,9 @@
     data() {
       const validatePass = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('Please enter your password'))
+          callback(new Error(this.$t('m.regis.password')))
         } else if (value.length < 6) {
-          callback(new Error('The password length can\'t be less then 6 characters'))
+          callback(new Error(this.$t('m.regis.sixLess')))
         } else {
           callback()
         }
@@ -61,8 +61,8 @@
         },
         loginRule: {
           email: [
-            { required: true, message: 'Please input your email address', trigger: 'blur' },
-            { type: 'email', message: 'Invalid email address', trigger: 'blur' }
+            { required: true, message: this.$t('m.regis.email'), trigger: 'blur' },
+            { type: 'email', message: this.$t('m.regis.invalid'), trigger: 'blur' }
           ],
           passwd: [
             { validator: validatePass, trigger: 'blur' }
@@ -93,7 +93,7 @@
               this.$router.push({path: redirect})
             }, err => {
               this.loading = false
-              this.$Modal.error({title: 'Error', content: err.message ? err.message : 'unknown error'})
+              this.$Modal.error({title: this.$t('m.error'), content: err.message ? err.message : this.$t('m.unKnown')})
             })
           }
         })
@@ -101,13 +101,13 @@
       },
       resetPassword() {
         this.$Modal.confirm({
-          title: 'Reset Password',
+          title: this.$t('m.login.resetPassword'),
           render: (h) => {
             return h('Input', {
               props: {
                 value: this.loginForm.email,
                 autofocus: true,
-                placeholder: 'Please enter your email...'
+                placeholder: this.$t('m.login.email')
               },
               on: {
                 input: (val) => {
@@ -117,14 +117,14 @@
             })
           },
           loading: true,
-          okText: 'Reset password',
+          okText: this.$t('m.login.resetPassword'),
           onOk: () => {
             this.sendResetPasswordEmail(this.loginForm.email).then(res => {
               this.$Modal.remove()
-              this.$Message.info('Reset password email has been sent, please check your mailbox.')
+              this.$Message.info(this.$t('m.login.resetEmail'))
             }, err => {
               this.$Modal.remove()
-              this.$Message.error(err.message || 'unknown error')
+              this.$Message.error(err.message || this.$t('m.error'))
             })
           }
         })
@@ -137,7 +137,7 @@
         }
         return new Promise((resolve, reject) => {
           if (!this.validateEmail(email)) {
-            reject(new Error('invalid email address'))
+            reject(new Error(this.$t('m.regis.invalid')))
             return
           }
           userAPI.sendResetPasswordEmail(payload).then((response) => {

@@ -54,7 +54,7 @@
               ])
             }
           }, {
-            title: 'Size',
+            title: this.$t('m.adzoneTab.size'),
             key: 'size',
             align: 'center',
             width: 100,
@@ -62,16 +62,16 @@
               return h('span', params.row.size.width + 'x' + params.row.size.height)
             }
           }, {
-            title: 'Rolling',
+            title: this.$t('m.adzoneTab.rolling'),
             key: 'rolling',
             align: 'right',
             width: 100
           }, {
-            title: 'Minimum CPT (Ether/Day)',
+            title: this.$t('m.adzoneTab.mini'),
             key: 'min_cpt',
             align: 'right'
           }, {
-            title: 'Status',
+            title: this.$t('m.adzoneTab.status'),
             key: 'online_status',
             width: 100,
             filters: [
@@ -90,7 +90,7 @@
               }, this.statusTagText(params.row))
             }
           }, {
-            title: 'Time',
+            title: this.$t('m.adzoneTab.time'),
             key: 'inserted_at',
             width: 260,
             render: (h, params) => {
@@ -100,7 +100,7 @@
               ])
             }
           }, {
-            title: 'Action',
+            title: this.$t('m.adzoneTab.action'),
             key: 'action',
             align: 'center',
             size: 150,
@@ -227,7 +227,7 @@
       getAdzones() {
         return new Promise((resolve, reject) => {
           if (!this.media) {
-            reject(new Error('missing media'))
+            reject(new Error(this.$t('m.adzoneTab.miss')))
             return
           }
           const payload = {token: this.token, media_id: this.media.id}

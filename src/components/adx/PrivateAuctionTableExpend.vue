@@ -8,7 +8,7 @@
       </Col>
     </Row>
     <template v-if="row.reject_reason">
-      <h4>Reject Reason</h4>
+      <h4>{{$t('m.pata.reje')}}</h4>
       <p>{{ row.reject_reason }}</p>
     </template>
   </div>

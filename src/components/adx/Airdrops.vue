@@ -2,23 +2,23 @@
   <div>
     <Modal
         v-model="showAddAirdrop"
-        title="Add Airdrop"
-        ok-text="Submit"
+        :title="this.$t('m.airdrops.title')"
+        :ok-text="this.$t('m.airdrops.okText')"
         loading
         @on-ok="onAddAirdrop">
         <AddAirdrop ref="addAirdrop"></AddAirdrop>
     </Modal>
     <Modal
         v-model="showEditAirdrop"
-        title="Edit Airdrop"
-        ok-text="Submit"
+        :title="this.$t('m.airdrops.okText')"
+        :ok-text="this.$t('m.airdrops.okText')"
         loading
         @on-ok="onEditAirdrop">
         <EditAirdrop ref="editAirdrop"></EditAirdrop>
     </Modal>
     <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
       <p slot="title">
-        Airdrop List
+       {{$t('m.airdrops.airdropList')}}
       </p>
       <SearchToolbar slot="extra" ref="searchToolbar" @searchAirdrops="onSearch" @addAirdropClick="onShowAddAirdrop"></SearchToolbar>
       <p>
@@ -62,12 +62,12 @@
             align: 'left',
             width: 100
           }, {
-            title: 'Title', 
+            title: this.$t('m.airdrops.tit'), 
             key: 'title',
             align: 'left',
             width: 200
           }, {
-            title: 'Budget', 
+            title: this.$t('m.airdrops.budget'), 
             key: 'budget',
             align: 'right',
             width: 120,
@@ -82,7 +82,7 @@
               ])
             }
           }, {
-            title: 'GiveOut/User', 
+            title: this.$t('m.airdrops.giveOut'), 
             key: 'give_out',
             align: 'right',
             width: 120,
@@ -97,7 +97,7 @@
               ])
             }
           }, {
-            title: 'Bonus', 
+            title: this.$t('m.airdrops.bonus'), 
             key: 'bonus',
             align: 'right',
             width: 100,
@@ -112,7 +112,7 @@
               ])
             }
           }, {
-            title: 'Date Range', 
+            title: this.$t('m.airdrops.dateRange'), 
             key: 'start_time',
             align: 'right',
             width: 150,
@@ -125,7 +125,7 @@
               ])
             }
           }, {
-            title: 'Telegram',
+            title: this.$t('m.airdrops.telegram'),
             key: 'telegram_group',
             align: 'center',
             render: (h, params) => {
@@ -137,7 +137,7 @@
               }, 'https://t.me/' + params.row.telegram_group)
             }
           }, {
-            title: 'Created/Updated', 
+            title: this.$t('m.airdrops.created'), 
             key: 'inserted_at',
             align: 'center',
             width: 170,
@@ -168,7 +168,7 @@
               ])
             }
           }, {
-            title: 'Online Status',
+            title: this.$t('m.airdrops.online'),
             key: 'online_status',
             align: 'center',
             width: 120,
@@ -176,7 +176,7 @@
               return this.onlineStatusDisplay(h, params.row)
             }
           }, {
-            title: 'Action',
+            title: this.$t('m.airdrops.action'),
             key: 'action',
             align: 'center',
             size: 80,

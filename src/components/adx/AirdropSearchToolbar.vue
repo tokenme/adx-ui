@@ -1,15 +1,15 @@
 <template>
   <Form slot="header" ref="filterForm" :model="filter" inline>
-    <FormItem label="OnlineStatus" prop="onlineStatus" :label-width="80">
+    <FormItem :label="this.$t('m.airdropSearch.online')" prop="onlineStatus" :label-width="80">
       <Select v-model="filter.onlineStatus" @on-change="onSearch" style="width:100px">
         <Option v-for="item in statusOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
     </FormItem>
-    <FormItem label="DateRange" props="dateRange" :label-width="80">
-      <DatePicker v-model="filter.dateRange" type="daterange" split-panels placeholder="Select date" style="width: 200px"></DatePicker>
+    <FormItem :label="this.$t('m.airdropSearch.dateRange')" props="dateRange" :label-width="84">
+      <DatePicker v-model="filter.dateRange" type="daterange" split-panels :placeholder="this.$t('m.airdropSearch.selectDate')" style="width: 200px"></DatePicker>
     </FormItem>
-    <Button type="primary" icon="ios-search" @click="onSearch">Search</Button>
-    <Button type="success" icon="ios-plus-outline" @click="onAddAirdrop">New Airdrop</Button>
+    <Button type="primary" icon="ios-search" @click="onSearch">{{$t('m.airdropSearch.search')}}</Button>
+    <Button type="success" icon="ios-plus-outline" @click="onAddAirdrop">{{$t('m.airdropSearch.newAirdrop')}}</Button>
   </Form>
 </template>
 
@@ -23,9 +23,9 @@
           dateRange: []
         },
         statusOptions: [
-          { value: 0, label: 'all' },
-          { value: -1, label: 'offline' },
-          { value: 1, label: 'online' }
+          { value: 0, label: this.$t('m.al') },
+          { value: -1, label: this.$t('m.of') },
+          { value: 1, label: this.$t('m.onl') }
         ]
       }
     },

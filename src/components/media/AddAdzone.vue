@@ -1,24 +1,24 @@
 <template>
   <Form ref="addAdzoneForm" :model="addAdzoneForm" :rules="addRule" :label-width="200">
-    <FormItem label="Size" prop="sizeId" :required="true" >
+    <FormItem :label="this.$t('m.addAdzone.size')" prop="sizeId" :required="true" >
       <Select v-model="addAdzoneForm.sizeId" style="width:200px">
         <Option v-for="size in sizes" :value="size.id" :key="size.id">{{ size.width }}x{{ size.height }}</Option>
       </Select>
     </FormItem>
-    <FormItem label="Minimum Price (Ether/Day)" prop="minCpt" :required="true" style="width:200px">
+    <FormItem :label="this.$t('m.addAdzone.mini')" prop="minCpt" :required="true" style="width:200px">
       <InputNumber :max="1000" :min="0.0001" :step="0.0001" v-model="addAdzoneForm.minCpt"></InputNumber>
     </FormItem>
-    <FormItem label="Maximum Rolling" prop="rolling" :required="true">
+    <FormItem :label="this.$t('m.addAdzone.max')" prop="rolling" :required="true">
       <InputNumber :max="10" :min="1" :step="1" v-model="addAdzoneForm.rolling"></InputNumber>
     </FormItem>
-    <FormItem label="Url" prop="url">
-      <Input type="text" v-model="addAdzoneForm.url" placeholder="adzone url"></Input>
+    <FormItem :label="this.$t('m.addAdzone.url')" prop="url">
+      <Input type="text" v-model="addAdzoneForm.url" :placeholder="this.$t('m.addAdzone.adzoneUrl')"></Input>
     </FormItem>
-    <FormItem label="Desc" prop="desc">
-      <Input v-model="addAdzoneForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Adzone description"></Input>
+    <FormItem :label="this.$t('m.addAdzone.desc')" prop="desc">
+      <Input v-model="addAdzoneForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :placeholder="this.$t('m.addAdzone.adzoneDesc')"></Input>
     </FormItem>
     <img :src="addAdzoneForm.placeholder.img_url" v-if="addAdzoneForm.placeholder && addAdzoneForm.placeholder.img_url" :style="imgStyle">
-    <FormItem label="Placeholder Image">
+    <FormItem :label="this.$t('m.addAdzone.placeImg')">
       <Upload 
         ref="uploadModel"
         action="/creative/upload" 
@@ -28,14 +28,14 @@
         :on-format-error="handleFormatError"
         :on-exceeded-size="handleMaxSize"
         :on-success="handleSuccess">
-        <Button type="ghost" icon="ios-cloud-upload-outline">Upload Image</Button>
+        <Button type="ghost" icon="ios-cloud-upload-outline">{{$t('m.addAdzone.uploadImg')}}</Button>
       </Upload>
     </FormItem>
     <FormItem 
-      label="Placeholder Landing Page" 
+      :label="this.$t('m.addAdzone.landing')" 
       prop="placeholder.url" 
-      :rules="{type: 'url', message: 'invalid url', trigger: 'blur'}">
-      <Input type="text" v-model="addAdzoneForm.placeholder.url" placeholder="placeholder landing page"></Input>
+      :rules="{type: 'url', message: this.$t('m.addAdzone.invalidUrl'), trigger: 'blur'}">
+      <Input type="text" v-model="addAdzoneForm.placeholder.url" :placeholder="this.$t('m.addAdzone.landing')"></Input>
     </FormItem>
   </Form>
 </template>
@@ -60,11 +60,11 @@
         },
         addRule: {
           url: [
-            { required: true, message: 'Please input url', trigger: 'blur' },
-            { type: 'url', message: 'invalid url', trigger: 'blur' }
+            { required: true, message: this.$t('m.addAdzone.inputUrl'), trigger: 'blur' },
+            { type: 'url', message: this.$t('m.addAdzone.invalidUrl'), trigger: 'blur' }
           ],
           desc: [
-            { required: true, message: 'Please enter the adzone introduction', trigger: 'blur' }
+            { required: true, message: this.$t('m.addAdzone.enterAdzone'), trigger: 'blur' }
           ]
         }
       }
@@ -107,14 +107,14 @@
       },
       handleFormatError (file) {
         this.$Notice.warning({
-          title: 'The file format is incorrect',
-          desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+          title: this.$t('m.addAdzone.fromatIncorrect'),
+          desc: this.$t('m.addAdzone.fileFormat') + file.name + this.$t('m.addAdzone.isINcorrect')
         });
       },
       handleMaxSize (file) {
         this.$Notice.warning({
-          title: 'Exceeding file size limit',
-          desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+          title: this.$t('m.addAdzone.exceeding'),
+          desc: this.$t('m.addAdzone.file') + file.name + this.$t('m.addAdzone.tooLarge')
         });
       },
       submit(resolve, reject) {

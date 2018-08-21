@@ -5,16 +5,16 @@
         {{ title }}
       </p>
       <Form slot="extra" inline>
-        <FormItem label="DateRange" props="dateRange" :label-width="80">
-          <DatePicker :options="dateRangeOptions" v-model="dateRange" type="daterange" split-panels placeholder="Select date" style="width: 200px" @on-change="onDateChange"></DatePicker>
+        <FormItem :label="this.$t('m.statsChart.dateRange')" props="dateRange" :label-width="84">
+          <DatePicker :options="dateRangeOptions" v-model="dateRange" type="daterange" split-panels :placeholder="this.$t('m.statsChart.selectDate')" style="width: 200px" @on-change="onDateChange"></DatePicker>
         </FormItem>
-        <FormItem label="Series" prop="chartSeries" :label-width="40">
+        <FormItem :label="this.$t('m.statsChart.series')" prop="chartSeries" :label-width="40">
           <Select v-model="chartSeries" style="width: 100px">
             <Option v-for="item in seriesOptions" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
         </FormItem>
-        <Button type="primary" icon="ios-grid" @click="showTable = !showTable">{{ showTable ? 'Hide Table' : 'Show Table' }}</Button>
-        <Button type="primary" icon="ios-download-outline" @click="exportCSV">Export</Button>
+        <Button type="primary" icon="ios-grid" @click="showTable = !showTable">{{ showTable ? this.$t('m.hide') : this.$t('m.show') }}</Button>
+        <Button type="primary" icon="ios-download-outline" @click="exportCSV">{{$t('m.statsChart.export')}}</Button>
       </Form>
       <p :style="{height:height}">
         <BarChart
@@ -33,7 +33,7 @@
       <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
-            Countries Stats
+            {{$t('m.statsChart.countriesStats')}}
           </p>
           <HorizontalBar
             :chart-data="countryData"
@@ -46,7 +46,7 @@
       <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
-            Platforms Stats
+            {{$t('m.statsChart.platformsStats')}}
           </p>
           <PieChart
             :chart-data="browserTypeData"
@@ -59,7 +59,7 @@
       <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
-            OS Stats
+            {{$t('m.statsChart.osStats')}}
           </p>
           <PieChart
             :chart-data="osData"
@@ -72,7 +72,7 @@
       <Col span="5">
         <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
           <p slot="title">
-            Browsers Stats
+            {{$t('m.statsChart.browsersStats')}}
           </p>
           <HorizontalBar
             :chart-data="browserData"
@@ -115,12 +115,12 @@
         browserTypeSpinShow: false,
         osSpinShow: false,
         browserSpinShow: false,
-        chartSeries: 'pv',
+        chartSeries: this.$t('m.pv'),
         seriesOptions: [
-          { label: 'pv', value: 'pv' },
-          { label: 'uv', value: 'uv' },
-          { label: 'clicks', value: 'clicks' },
-          { label: 'ctr', value: 'ctr' }
+          { label: this.$t('m.pv'), value: this.$t('m.pv') },
+          { label: this.$t('m.uv'), value: this.$t('m.uv') },
+          { label: this.$t('m.cli'), value: this.$t('m.cli') },
+          { label: this.$t('m.ctr'), value: this.$t('m.ctr') }
         ],
         dateRangeOptions: {
           disabledDate (date) {
@@ -154,23 +154,23 @@
       columns() {
         return [
           {
-            title: this.stats.length > 0 && this.stats[0].hour !== undefined ? 'Hour' : 'Date', 
+            title: this.stats.length > 0 && this.stats[0].hour !== undefined ? this.$t('m.hour') : this.$t('m.da'), 
             key: this.stats.length > 0 && this.stats[0].hour !== undefined ? 'hour' : 'date',
             align: 'left'
           }, {
-            title: 'PV',
+            title: this.$t('m.PV'),
             key: 'pv',
             align: 'right'
           }, {
-            title: 'UV',
+            title: this.$t('m.UV'),
             key: 'uv',
             align: 'right'
           }, {
-            title: 'Clicks',
+            title: this.$t('m.Clicks'),
             key: 'clicks',
             align: 'right'
           }, {
-            title: 'CTR',
+            title: this.$t('m.CTR'),
             key: 'ctr',
             align: 'center',
             size: 80,

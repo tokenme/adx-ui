@@ -20,9 +20,9 @@
     computed: {
       chartTitle() {
         if (!this.auction) {
-          return 'Auction Stats'
+          return this.$t('m.pas.auc')
         }
-        return 'Auction [' + this.auction.title + '] Status'
+        return this.$t('m.pas.a') + ' [' + this.auction.title + '] ' + this.$t('m.pas.s')
       }
     },
     created() {

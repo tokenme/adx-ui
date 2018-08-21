@@ -2,34 +2,34 @@
   <div>
     <Modal
         v-model="showAddMedia"
-        title="Add Media"
-        ok-text="Submit"
+        :title="this.$t('m.dash.title')"
+        :ok-text="this.$t('m.dash.okText')"
         loading
         @on-ok="onAddMedia">
         <AddMedia ref="addMedia"></AddMedia>
     </Modal>
     <Modal
         v-model="showEditMedia"
-        title="Edit Media"
+        :title="this.$t('m.dash.ed')"
         ok-text="Submit"
         loading
         @on-ok="onEditMedia">
         <EditMedia ref="editMedia" :media="mediaToEdit"></EditMedia>
     </Modal>
     <MediaVerify ref="mediaVerifyModal" :media="mediaToVerify" @mediaVerified="onMediaVerified" @mediaVerifyFailed="onMediaVerifyFailed"></MediaVerify>
-    <StatsChart ref="statsChart" title="Account Stats" :height="300"></StatsChart>
+    <StatsChart ref="statsChart" :title="this.$t('m.dash.acc')" :height="300"></StatsChart>
     <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
       <p slot="title">
-        Media List
+        {{$t('m.dash.me')}}
       </p>
       <Button slot="extra" type="primary" icon="ios-plus" @click="showAddMedia=true">
-        Add Media
+        {{$t('m.dash.add')}}
       </Button>
       <p>
         <MediaTable ref="mediaTable" @mediaVerify="onMediaVerify" @mediaEdit="onMediaEdit" v-if="medias"></MediaTable>
         <Row type="flex" justify="center" v-else>
           <Col style="text-align:center">
-            <p style="padding:20px 0">No Webistes in your account, click the button below to add new website.</p>
+            <p style="padding:20px 0">{{$t('m.dash.noWeb')}}</p>
             <Button type="primary" icon="ios-plus" size="large" @click="showAddMedia=true">
               Add Media
             </Button>
@@ -88,7 +88,7 @@
       onMediaVerifyFailed(err) {
         console.log(err)
         this.$refs.mediaVerifyModal.hide()
-        this.$Message.error('Verification Failed!')
+        this.$Message.error(this.$t('m.dash.ver'))
       },
       onMediaVerify(media) {
         this.mediaToVerify = media

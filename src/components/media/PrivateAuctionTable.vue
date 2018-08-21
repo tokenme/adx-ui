@@ -2,7 +2,7 @@
   <div>
     <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
       <p slot="title">
-        Private Auction List
+        {{$t('m.pat.pr')}}
       </p>
       <SearchToolbar slot="extra" ref="searchToolbar" @searchPrivateAuctions="onSearch"></SearchToolbar>
       <p>
@@ -52,17 +52,17 @@
             align: 'left',
             width: 100
           }, {
-            title: 'Title', 
+            title: this.$t('m.pat.tit'), 
             key: 'title',
             align: 'left',
             width: 200
           }, {
-            title: 'Ether/Day', 
+            title: this.$t('m.pat.eth'), 
             key: 'price',
             align: 'right',
             width: 120
           }, {
-            title: 'Total Cost', 
+            title: this.$t('m.pat.to'), 
             key: 'cost',
             align: 'right',
             width: 100,
@@ -70,7 +70,7 @@
               return h('span', params.row.cost + ' Ether')
             }
           }, {
-            title: 'Days', 
+            title: this.$t('m.pat.day'), 
             key: 'start_time',
             align: 'right',
             width: 80,
@@ -80,7 +80,7 @@
               return h('span', endTime.from(startTime, true))
             }
           }, {
-            title: 'Date Range', 
+            title: this.$t('m.pat.date'), 
             key: 'start_time',
             align: 'left',
             width: 150,
@@ -93,7 +93,7 @@
               ])
             }
           }, {
-            title: 'Media',
+            title: this.$t('m.pat.media'),
             key: 'media',
             align: 'center',
             render: (h, params) => {
@@ -110,7 +110,7 @@
               }, params.row.adzone.media.title)
             }
           }, {
-            title: 'Size',
+            title: this.$t('m.pat.size'),
             key: 'size',
             align: 'center',
             width: 100,
@@ -118,7 +118,7 @@
               return h('span', params.row.adzone.size.width + 'x' + params.row.adzone.size.height)
             }
           }, {
-            title: 'Audit Status',
+            title: this.$t('m.pat.aud'),
             key: 'audit_status',
             align: 'center',
             width: 120,
@@ -126,7 +126,7 @@
               return this.AuditStatusDisplay(h, params.row)
             }
           }, {
-            title: 'Action',
+            title: this.$t('m.pat.ac'),
             key: 'action',
             align: 'center',
             size: 80,
@@ -253,7 +253,7 @@
         }
         this.$Modal.confirm({
           title: 'Warning',
-          content: '<p>If you confirmed this deal, all the other auctions which date range is overlapping to this one will be rejected in this adzone</p>',
+          content: "<p>{{$t('m.pat.if')}}</p>",
           loading: true,
           okText: 'Yes',
           cancelText: 'No',
@@ -288,12 +288,12 @@
                 props: {
                   type: 'warning'
                 }
-              }, 'The rejected auction could not be recovered, are you sure to reject this one?'),
+              }, this.$t('m.pat.the')),
               h('Input', {
                 props: {
                   value: this.rejectReason,
                   autofocus: true,
-                  placeholder: 'Please enter reject reason...'
+                  placeholder: this.$t('m.pat.enter')
                 },
                 on: {
                   input: (val) => {
@@ -309,7 +309,7 @@
           onOk: () => {
             if (this.rejectReason === '') {
               this.$Modal.remove()
-              this.$Message.error('missin reject reason')
+              this.$Message.error(this.$t('m.pat.miss'))
               return
             }
             this.auditAuction({id: auction.id, audit_status: 2, reject_reason: this.rejectReason}).then(res => {

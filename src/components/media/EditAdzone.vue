@@ -1,19 +1,19 @@
 <template>
   <Form ref="editAdzoneForm" :model="editForm" :rules="editRule" :label-width="200" v-if="editForm">
-    <FormItem label="Minimum Price (Ether/Day)" prop="minCpt" :required="true" style="width:200px">
+    <FormItem :label="this.$t('m.editAd.mini')" prop="minCpt" :required="true" style="width:200px">
       <InputNumber :max="10" :min="0.0001" :step="0.0001" v-model="editForm.minCpt"></InputNumber>
     </FormItem>
-    <FormItem label="Maximum Rolling" prop="rolling" :required="true">
+    <FormItem :label="this.$t('m.editAd.max')" prop="rolling" :required="true">
       <InputNumber :max="10" :min="1" :step="1" v-model="editForm.rolling"></InputNumber>
     </FormItem>
-    <FormItem label="Url" prop="url">
+    <FormItem :label="this.$t('m.editAd.url')" prop="url">
       <Input type="text" v-model="editForm.url" placeholder="adzone url"></Input>
     </FormItem>
-    <FormItem label="Desc" prop="desc">
-      <Input v-model="editForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Adzone description"></Input>
+    <FormItem :label="this.$t('m.editAd.desc')" prop="desc">
+      <Input v-model="editForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :placeholder="this.$t('m.editAd.adDesc')"></Input>
     </FormItem>
     <img :src="editForm.placeholder.img_url" v-if="editForm.placeholder && editForm.placeholder.img_url" :style="imgStyle">
-    <FormItem label="Placeholder Image">
+    <FormItem :label="this.$t('m.editAd.placeImg')">
       <Upload 
         ref="uploadModel"
         action="/creative/upload" 
@@ -23,14 +23,14 @@
         :on-format-error="handleFormatError"
         :on-exceeded-size="handleMaxSize"
         :on-success="handleSuccess">
-        <Button type="ghost" icon="ios-cloud-upload-outline">Upload Image</Button>
+        <Button type="ghost" icon="ios-cloud-upload-outline">{{$t('m.editAd.uploadImg')}}</Button>
       </Upload>
     </FormItem>
     <FormItem 
-      label="Placeholder Landing Page" 
+      :label="this.$t('m.edit.landing')" 
       prop="placeholder.url" 
-      :rules="{type: 'url', message: 'invalid url', trigger: 'blur'}">
-      <Input type="text" v-model="editForm.placeholder.url" placeholder="placeholder landing page"></Input>
+      :rules="{type: 'url', message: this.$t('m.edit.invalidUrl'), trigger: 'blur'}">
+      <Input type="text" v-model="editForm.placeholder.url" placeholder="this.$t('m.edit.landing')"></Input>
     </FormItem>
   </Form>
 </template>
@@ -58,11 +58,11 @@
         },
         editRule: {
           url: [
-            { required: true, message: 'Please input url', trigger: 'blur' },
-            { type: 'url', message: 'invalid url', trigger: 'blur' }
+            { required: true, message: this.$t('m.edit.inputUrl'), trigger: 'blur' },
+            { type: 'url', message: this.$t('m.edit.invalidUrl'), trigger: 'blur' }
           ],
           desc: [
-            { required: true, message: 'Please enter the adzone introduction', trigger: 'blur' }
+            { required: true, message: this.$t('m.edit.enterAdzone'), trigger: 'blur' }
           ]
         }
       }
@@ -104,14 +104,14 @@
       },
       handleFormatError (file) {
         this.$Notice.warning({
-          title: 'The file format is incorrect',
-          desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+          title: this.$t('m.editAd.fromatIncorrect'),
+          desc: this.$t('m.editAd.fileFormat') + file.name + this.$t('m.editAd.isINcorrect')
         });
       },
       handleMaxSize (file) {
         this.$Notice.warning({
-          title: 'Exceeding file size limit',
-          desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+          title: this.$t('m.editAd.exceeding'),
+          desc: this.$t('m.editAd.file') + file.name + this.$t('m.editAd.tooLarge')
         });
       },
       submit(resolve, reject) {

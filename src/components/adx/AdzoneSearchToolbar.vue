@@ -1,17 +1,17 @@
 <template>
   <Form slot="header" ref="filterForm" :model="filter" inline>
-    <FormItem label="Domain" prop="domain" :label-width="80" v-if='showDomain'>
-      <Input type="text" v-model="filter.domain" placeholder="website domain"></Input>
+    <FormItem :label="this.$t('m.adZoneSearch.domain')" prop="domain" :label-width="80" v-if='showDomain'>
+      <Input type="text" v-model="filter.domain" :placeholder="this.$t('m.adZoneSearch.webDomain')"></Input>
     </FormItem>
-    <FormItem label="DateRange" props="dateRange" :label-width="80">
-      <DatePicker :options="dateRangeOptions" v-model="filter.dateRange" type="daterange" split-panels placeholder="Select date" style="width: 200px"></DatePicker>
+    <FormItem :label="this.$t('m.adZoneSearch.dateRange')" props="dateRange" :label-width="84">
+      <DatePicker :options="dateRangeOptions" v-model="filter.dateRange" type="daterange" split-panels :placeholder="this.$t('m.adZoneSearch.selectDate')" style="width: 200px"></DatePicker>
     </FormItem>
-    <FormItem label="Size" prop="sizes" :label-width="40">
+    <FormItem :label="this.$t('m.adZoneSearch.size')" prop="sizes" :label-width="80">
       <Select v-model="filter.sizes" multiple>
         <Option v-for="item in sizes" :value="item.id" :key="item.id">{{ item.width }}x{{ item.height }}</Option>
       </Select>
     </FormItem>
-    <Button type="primary" icon="ios-search" @click="onSearch">Search</Button>
+    <Button type="primary" icon="ios-search" @click="onSearch">{{$t('m.adZoneSearch.search')}}</Button>
   </Form>
 </template>
 

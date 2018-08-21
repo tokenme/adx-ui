@@ -1,16 +1,16 @@
 <template>
   <Modal
     v-model="showVerifyIntro"
-    :title="'Verification for ' + media.domain"
-    ok-text="Verify"
-    cancel-text="Close"
+    :title="this.$t('m.mv.vf') + media.domain"
+    :ok-text="this.$t('m.mv.ok')"
+    :cancel-text="this.$t('m.mv.can')"
     loading
     @on-ok="onVerifiy"
     v-if="media">
-    <p>There are tow methods to verify your website</p>
+    <p>{{$t('m.mv.tow')}}</p>
     <Steps  direction="vertical">
-      <Step title="Verify by URL" status="process" :content="'Make the following url avaliable. `' + media.verify_url + '`'"></Step>
-      <Step title="Verify by DNS" status="process" :content="'Add the following CNAME record in your DNS setting. `' + media.verify_dns + '` with Value: `' + media.dns_value + '`'"></Step>
+      <Step :title="this.$t('m.mv.vb')" status="process" :content="'Make the following url avaliable. `' + media.verify_url + '`'"></Step>
+      <Step :title="this.$t('m.mv.vd')" status="process" :content="'Add the following CNAME record in your DNS setting. `' + media.verify_dns + '` with Value: `' + media.dns_value + '`'"></Step>
     </Steps>
   </Modal>
 </template>

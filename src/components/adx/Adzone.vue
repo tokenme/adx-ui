@@ -3,8 +3,8 @@
     <Modal
         v-if="adzone"
         v-model="showAddPrivateAuction"
-        title="New Private Auction"
-        ok-text="Submit"
+        :title="this.$t('m.adZone.title')"
+        :ok-text="this.$t('m.adZone.okText')"
         loading
         @on-ok="onAddPrivateAuction"
         @on-visible-change="restPrivateAuction">
@@ -12,20 +12,20 @@
     </Modal>
     <Card v-if="adzone" :bordered="false" :dis-hover="true" :shadow="false">
       <h2 slot="title">
-        {{ adzone.media.title }}[AdzoneID: {{ adzone.id }}]
+        {{ adzone.media.title }}[{{this.$t('m.newPrivate.adZoneId')}} {{ adzone.id }}]
       </h2>
       <a slot="extra" :href="adzone.media.domain" target="_blank">
         <Icon type="link"></Icon>
         {{ adzone.media.domain }}
       </a>
-      <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1">Buy</Button>
+      <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1">{{$t('m.adZone.buy')}}</Button>
       <Row type="flex" justify="space-between">
         <Col span="10">
           <p>{{ adzone.desc }}</p>
           <Row type="flex" justify="start" :gutter="30">
-            <Col>Size: {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
-            <Col>Rolling: {{ adzone.rolling }}</Col>
-            <Col>Suggest Price: {{ adzone.suggest_cpt }} Ether/Day</Col>
+            <Col>{{$t('m.adZone.size')}} {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
+            <Col>{{$t('m.adZone.rolling')}} {{ adzone.rolling }}</Col>
+            <Col>{{$t('m.adZone.suggest')}} {{ adzone.suggest_cpt }} {{$t('m.adZone.ether')}}</Col>
           </Row>
         </Col>
         <Col span="12">
@@ -33,7 +33,7 @@
         </Col>
       </Row>
     </Card>
-    <StatsChart ref="statsChart" title="Adzone Stats" :media-id="adzone.media.id" :adzone-id="adzone.id" :height="300" v-if="adzone"></StatsChart>
+    <StatsChart ref="statsChart" :title="this.$t('m.adZone.adzoneStats')" :media-id="adzone.media.id" :adzone-id="adzone.id" :height="300" v-if="adzone"></StatsChart>
     <AuctionTable ref="auctionTable" :media-id="adzone.media.id" :adzone-id="adzone.id" :adzone="adzone" v-if="adzone"></AuctionTable>
   </div>
 </template>
@@ -84,7 +84,7 @@
             events.push({
               start: start.toDate(),
               end: end.toDate(),
-              title: 'unavailable'
+              title: this.$t('m.adZone.unavailable')
             })
             start = date
             end = date
@@ -96,7 +96,7 @@
           events.push({
             start: start.toDate(),
             end: end.toDate(),
-            title: 'unavailable'
+            title: this.$t('m.adZone.unavailable')
           })
         }
         return events
@@ -142,7 +142,7 @@
         }, err => {
           this.showAddPrivateAuction = false
           if (err.code === 600) {
-            this.$Modal.error({title: 'Error', content: 'You don\'t have enough balance, please deposit before making order.'})
+            this.$Modal.error({title: 'Error', content: this.$t('m.adZone.noenough')})
             return
           } else if (err.code === 401) {
             this.$router.push({

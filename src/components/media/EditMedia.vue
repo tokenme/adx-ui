@@ -1,10 +1,10 @@
 <template>
   <Form ref="editMediaForm" :model="media" :rules="editRule" :label-width="80" v-if="media">
-    <FormItem label="Title" prop="title">
-      <Input type="text" v-model="media.title" placeholder="The name of your website"></Input>
+    <FormItem :label="this.$t('m.editMed.title')" prop="title">
+      <Input type="text" v-model="media.title" :placeholder="this.$t('m.editMed.name')"></Input>
     </FormItem>
-    <FormItem label="Desc" prop="desc">
-      <Input v-model="media.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Media description"></Input>
+    <FormItem :label="this.$t('m.editMed.desc')" prop="desc">
+      <Input v-model="media.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :placeholder="this.$t('m.editMed.mediaDesc')"></Input>
     </FormItem>
   </Form>
 </template>
@@ -16,12 +16,12 @@
       return {
         editRule: {
           title: [
-            { required: true, message: 'Please input media name', trigger: 'blur' },
-            { type: 'string', max: 64, message: 'Title should be less than 64 characters', trigger: 'blur' }
+            { required: true, message: this.$t('m.editMed.inputMedia'), trigger: 'blur' },
+            { type: 'string', max: 64, message: this.$t('m.editMed.less64'), trigger: 'blur' }
           ],
           desc: [
-            { required: true, message: 'Please enter the website introduction', trigger: 'blur' },
-            { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
+            { required: true, message: this.$t('m.editMed.enterWeb'), trigger: 'blur' },
+            { type: 'string', min: 20, message: this.$t('m.editMed.less20'), trigger: 'blur' }
           ]
         }
       }
@@ -37,7 +37,7 @@
     methods: {
       submit(resolve, reject) {
         if (!this.media) {
-          reject(new Error('missing media information'))
+          reject(new Error(this.$t('m.editMed.miss')))
           return
         }
         this.$refs.editMediaForm.validate((valid) => {
