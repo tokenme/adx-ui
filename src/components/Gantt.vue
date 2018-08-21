@@ -58,7 +58,7 @@
                     <vue-context-menu ref="ctxMenu">
                       <slot name="context-menu" :selected="localSelected">
                         <li @click="$emit('selected', localSelected)" class="item">
-                          <i class="edit icon"></i>Edit
+                          <i class="edit icon"></i>{{$t('m.gantt.edit')}}
                         </li>
                       </slot>
                     </vue-context-menu>

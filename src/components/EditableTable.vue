@@ -43,7 +43,7 @@ const deleteButton = (vm, h, currentRow, index) => {
   return h('Poptip', {
     props: {
       confirm: true,
-      title: 'Are you sure about delete this?',
+      title: this.$t('m.editTable.sureDelete'),
       transfer: true
     },
     on: {

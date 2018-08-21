@@ -12,6 +12,12 @@
     position: relative;
     top: 16px;
 }
+.ivu-select-selection{
+    background: none !important;
+    border: none !important;
+    color: #fff !important;
+    font-size: 14px !important;
+}
 .layout-footer-center{
     text-align: center;
 }

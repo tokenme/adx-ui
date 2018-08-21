@@ -6,7 +6,7 @@
       </h2>
       <p>
         <dl>
-          <dt>Balance:</dt>
+          <dt>{{$t('m.account.balance')}}</dt>
           <dd v-if="balance===null"><Spin></Spin></dd>
           <dd v-else>{{ balance / Math.pow(10, 18) }} Ether</dd>
         </dl>

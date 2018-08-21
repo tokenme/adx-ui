@@ -2,20 +2,20 @@
   <div>
     <Card v-if="adzone" :bordered="false" :dis-hover="true" :shadow="false">
       <h2 slot="title">
-        {{ adzone.media.title }}[AdzoneID: {{ adzone.id }}]
+        {{ adzone.media.title }}{{$t('m.prau.ad')}}} {{ adzone.id }}]
       </h2>
       <a slot="extra" :href="adzone.media.domain" target="_blank">
         <Icon type="link"></Icon>
         {{ adzone.media.domain }}
       </a>
-      <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1">Buy</Button>
+      <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1">{{$t('m.prau.buy')}}</Button>
       <Row type="flex" justify="space-between">
         <Col span="10">
           <p>{{ adzone.desc }}</p>
           <Row type="flex" justify="start" :gutter="30">
-            <Col>Size: {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
-            <Col>Rolling: {{ adzone.rolling }}</Col>
-            <Col>Suggest Price: {{ adzone.suggest_cpt }} Ether/Day</Col>
+            <Col>{{$t('m.prau.size')}} {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
+            <Col>{{$t('m.prau.rol')}} {{ adzone.rolling }}</Col>
+            <Col>{{$t('m.prau.sug')}} {{ adzone.suggest_cpt }} {{$t('m.prau.ed')}}</Col>
           </Row>
           <a :href="adzone.placeholder.url" target="_blank" v-if="adzone.placeholder">
             <img :src="adzone.placeholder.img_url" :style="imgStyle" />
@@ -26,7 +26,7 @@
         </Col>
       </Row>
     </Card>
-    <StatsChart ref="statsChart" :title="(auctionId > 0 ? 'Auction': (adzoneId > 0 ? 'Adzone' : (mediaId > 0 ? 'Media' : 'Account') ) ) + ' Stats'" :media-id="mediaId" :adzone-id="adzoneId" :auction-id="auctionId" :height="300"></StatsChart>
+    <StatsChart ref="statsChart" :title="(auctionId > 0 ? this.$t('m.prau.acu'): (adzoneId > 0 ? this.$t('m.prau.Ad') : (mediaId > 0 ? this.$t('m.prau.me') : this.$t('m.prau.Ac')) ) ) + this.$t('m.prau.st')" :media-id="mediaId" :adzone-id="adzoneId" :auction-id="auctionId" :height="300"></StatsChart>
     <Gantt :events="events" :read-only="true" :start-period="startPeriod" :end-period="endPeriod" @selected="handleSelect"></Gantt>
     <AuctionTable ref="auctionTable" :media-id="mediaId" :adzone-id="adzoneId" :auction-id.sync="auctionId" @update="onAuctionsUpdate"></AuctionTable>
   </div>
@@ -91,7 +91,7 @@
             events.push({
               start: start.toDate(),
               end: end.toDate(),
-              title: 'unavailable'
+              title: this.$t('m.prau.unav')
             })
             start = date
             end = date
@@ -103,7 +103,7 @@
           events.push({
             start: start.toDate(),
             end: end.toDate(),
-            title: 'unavailable'
+            title: this.$t('m.prau.unav')
           })
         }
         return events
@@ -113,7 +113,7 @@
         for (const i of this.auctions) {
           const duration = moment(i.end_time).diff(moment(i.start_time), 'days')
           const event = {
-            title: i.title + ', TotalCost:' + i.cost + ', ' + i.price + ' ether/day, ' + duration + ' days',
+            title: i.title + ',' + this.$t('m.prau.toco') + i.cost + ', ' + i.price + this.$t('m.prau.eth') + ', ' + duration + this.$t('m.prau.days'),
             offset: moment(i.start_time).diff(moment(), 'days'),
             duration: duration,
             status: i.audit_status === 0 ? 'in_progress' : 'active',

@@ -2,7 +2,7 @@
   <div>
     <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
       <p slot="title">
-        Private Auction List
+        {{$t('m.pata.pri')}}
       </p>
       <SearchToolbar slot="extra" ref="searchToolbar" @searchPrivateAuctions="onSearch"></SearchToolbar>
       <p>
@@ -53,19 +53,19 @@
             align: 'left',
             width: 100
           }, {
-            title: 'Title', 
+            title: this.$t('m.pata.tit'), 
             key: 'title',
             align: 'left',
             width: 200,
             editable: true
           }, {
-            title: 'Ether/Day', 
+            title: this.$t('m.pata.eth'), 
             key: 'price',
             align: 'right',
             width: 120,
             editable: true
           }, {
-            title: 'Total Cost', 
+            title: this.$t('m.pata.tot'), 
             key: 'cost',
             align: 'right',
             width: 100,
@@ -73,7 +73,7 @@
               return h('span', params.row.cost + ' Ether')
             }
           }, {
-            title: 'Days', 
+            title: this.$t('m.pata.day'), 
             key: 'start_time',
             align: 'right',
             width: 80,
@@ -83,7 +83,7 @@
               return h('span', endTime.from(startTime, true))
             }
           }, {
-            title: 'Date Range', 
+            title: this.$t('m.pata.date'), 
             key: 'start_time',
             align: 'left',
             width: 150,
@@ -96,7 +96,7 @@
               ])
             }
           }, {
-            title: 'Media',
+            title: this.$t('m.pata.med'),
             key: 'media',
             align: 'center',
             render: (h, params) => {
@@ -113,7 +113,7 @@
               }, params.row.adzone.media.title)
             }
           }, {
-            title: 'Size',
+            title: this.$t('m.pata.size'),
             key: 'size',
             align: 'center',
             width: 100,
@@ -130,7 +130,7 @@
               }, params.row.adzone.size.width + 'x' + params.row.adzone.size.height)
             }
           }, {
-            title: 'Audit Status',
+            title: this.$t('m.pata.aud'),
             key: 'audit_status',
             align: 'center',
             width: 120,
@@ -138,7 +138,7 @@
               return this.AuditStatusDisplay(h, params.row)
             }
           }, {
-            title: 'Action',
+            title: this.$t('m.pata.ac'),
             key: 'action',
             align: 'center',
             size: 80,
@@ -278,7 +278,7 @@
         if (auction.audit_status !== 0) {
           this.$Modal.error({
             title: 'Error',
-            content: 'Can only edit the auction which audit status is in waiting'
+            content: this.$t('m.pata.can')
           })
           this.onSearch()
           return
@@ -309,8 +309,8 @@
           return
         }
         this.$Modal.confirm({
-          title: 'Warning',
-          content: '<p>The canceled auction could not be recovered, are you sure to cancel this auction?</p>',
+          title: this.$t('m.pata.war'),
+          content: "<p>{{$t('m.pata.the')}}</p>",
           loading: true,
           okText: 'Yes',
           cancelText: 'No',

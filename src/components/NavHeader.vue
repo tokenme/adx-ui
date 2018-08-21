@@ -17,12 +17,19 @@
             </MenuItem>
             <MenuItem name="logout">
               <Icon type="log-out"></Icon>
-              Logout
+              {{$t('m.logOut')}}
             </MenuItem>
           </template>
           <MenuItem name="login" v-else>
             <Icon type="log-in"></Icon>
-            Login
+            {{$t('m.logIn')}}
+            <!-- Login -->
+          </MenuItem>
+          <MenuItem name="lan" class="lang" >
+            <Select @on-change="this.changeLan" :placeholder="lang=='zh-CN'?'中文':'English'" size="small" style="width:80px" >
+              <Option value="EN">Engilish</Option>
+              <Option value="CN">中文</option>
+            </Select>
           </MenuItem>
         </Col>
       </Row>
@@ -34,10 +41,11 @@
   export default {
     data() {
       return {
+        lang: localStorage.lang ? localStorage.lang : 'en-US',
         menuItems: [
-          {icon: 'ios-speedometer-outline', name: 'Dashboard', route: 'dashboard', path: '/'},
-          {icon: 'ios-cart', name: 'Auctions', route: 'auctions', path: '/private-auctions'},
-          {icon: 'android-plane', name: 'Airdrops', route: 'airdrops', path: '/airdrops'}
+          {icon: 'ios-speedometer-outline', name: this.$t('m.dashBoard'), route: 'dashboard', path: '/'},
+          {icon: 'ios-cart', name: this.$t('m.auctions'), route: 'auctions', path: '/private-auctions'},
+          {icon: 'android-plane', name: this.$t('m.airdrop'), route: 'airdrops', path: '/airdrops'}
         ]
       }
     },
@@ -87,7 +95,23 @@
         this.$store.dispatch(types.LOGOUT_REQUEST).then(res => {
           this.$router.push({name: 'login'})
         })
+      },
+      changeLan(value){
+        if (value === 'EN') {
+          // this.$i18n.locale = 'en-US'
+          location.reload()
+          localStorage.lang = 'en-US'
+          // console.log(this)
+        }
+        if (value === 'CN') {
+          // this.$i18n.locale = 'zh-CN'
+          location.reload()
+          localStorage.lang = 'zh-CN'
+          // console.log(this)
+        }
       }
     }
   }
 </script>
+
+

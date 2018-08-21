@@ -10,27 +10,27 @@
       </a>
       <p>{{ adzone.desc }}</p>
       <Row type="flex" justify="space-between">
-        <Col>AdzoneID: {{ adzone.id }}</Col>
-        <Col>Size: {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
-        <Col>Rolling: {{ adzone.rolling }}</Col>
-        <Col>Suggest Price: {{ adzone.suggest_cpt }} Ether/Day</Col>
+        <Col>{{$t('m.newPrivate.adZoneId')}} {{ adzone.id }}</Col>
+        <Col>{{$t('m.newPrivate.size')}} {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
+        <Col>{{$t('m.newPrivate.rolling')}} {{ adzone.rolling }}</Col>
+        <Col>{{$t('m.newPrivate.suggest')}} {{ adzone.suggest_cpt }} {{$t('m.newPrivate.ether')}}</Col>
       </Row>
     </Card>
     <Card :bordered="false" :dis-hover="true" :shadow="false">
-      <h3 slot="title">Adgroup</h3>
+      <h3 slot="title">{{$t('m.newPrivate.adgroup')}}</h3>
       <Form ref="addForm" :model="addForm" :rules="addRule" :label-width="160">
-        <FormItem label="Title" prop="title">
-          <Input type="text" v-model="addForm.title" placeholder="adgroup title"></Input>
+        <FormItem :label="this.$t('m.newPrivate.title')" prop="title">
+          <Input type="text" v-model="addForm.title" :placeholder="this.$t('m.newPrivate.adgroupTitle')"></Input>
         </FormItem>
-        <FormItem label="Auction Price (Ether/Day)" prop="price" :required="true" style="width:200px">
+        <FormItem :label="this.$t('m.newPrivate.auctionPrice')" prop="price" :required="true" style="width:200px">
           <InputNumber :max="1000" :min="minPrice" :step="0.0001" v-model="addForm.price"></InputNumber>
         </FormItem>
-        <FormItem label="DateRange" props="dateRange">
-          <DatePicker :options="dateRangeOptions" v-model="addForm.dateRange" type="daterange" split-panels placeholder="Select date" style="width: 200px"></DatePicker>
+        <FormItem :label="this.$t('m.newPrivate.dateRange')" props="dateRange">
+          <DatePicker :options="dateRangeOptions" v-model="addForm.dateRange" type="daterange" split-panels :placeholder="this.$t('m.newPrivate.selectDate')" style="width: 200px"></DatePicker>
         </FormItem>
         <template v-for="(creative, index) in addForm.creatives">
           <img :src="creative.img.url" v-if="creative.img" :style="imgStyle">
-          <FormItem label="Image" :key="index + 'img'" v-else>
+          <FormItem :label="img" :key="index + 'img'" v-else>
             <Upload 
               action="/creative/upload" 
               :format="['jpg','jpeg','png']" 
@@ -39,22 +39,22 @@
               :on-format-error="handleFormatError"
               :on-exceeded-size="handleMaxSize"
               :on-success="handleSuccess">
-              <Button type="ghost" icon="ios-cloud-upload-outline">Upload Image</Button>
+              <Button type="ghost" icon="ios-cloud-upload-outline">{{uploadImg}}</Button>
             </Upload>
           </FormItem>
           <FormItem 
-            label="Landing Page" 
+            :label="landing" 
             prop="creative.url" 
             :prop="'creatives.' + index + '.url'" 
-            :rules="{type: 'url', message: 'invalid url', trigger: 'blur'}"
+            :rules="{type: 'url', message: invaildUrl, trigger: 'blur'}"
             :key="index + 'url'">
-            <Input type="text" v-model="creative.url" placeholder="creative landing_page"></Input>
+            <Input type="text" v-model="creative.url" :placeholder="creativeLanding"></Input>
           </FormItem>
         </template>
         <FormItem>
           <Row>
             <Col span="12">
-              <Button type="dashed" :disabled="!allowAddCreative" long @click="onAddCreative" icon="plus-round">Add creative</Button>
+              <Button type="dashed" :disabled="!allowAddCreative" long @click="onAddCreative" icon="plus-round">{{$t('m.newPrivate.addCreative')}}</Button>
             </Col>
           </Row>
         </FormItem>
@@ -69,6 +69,11 @@
   export default {
     data() {
       return {
+        img: this.$t('m.newPrivate.img'),
+        uploadImg: this.$t('m.newPrivate.uploadImg'),
+        landing: this.$t('m.newPrivate.landing'),
+        invaildUrl: this.$t('m.newPrivate.invaildUrl'),
+        creativeLanding: this.$t('m.newPrivate.creativeLanding'),
         addForm: {
           title: '',
           creatives: [],
@@ -77,14 +82,14 @@
         },
         addRule: {
           title: [
-            { required: true, message: 'Please input adgroup name', trigger: 'blur' },
-            { type: 'string', max: 64, message: 'Title should be less than 64 characters', trigger: 'blur' }
+            { required: true, message: this.$t('m.newPrivate.inputAdgroupName'), trigger: 'blur' },
+            { type: 'string', max: 64, message: this.$t('m.newPrivate.less64'), trigger: 'blur' }
           ],
           creatives: [
-            { required: true, message: 'Please upload creatives', trigger: 'blur' }
+            { required: true, message: this.$t('m.newPrivate.uploadCreative'), trigger: 'blur' }
           ],
           dateRange: [
-            { required: true, message: 'Please select dateRange', trigger: 'blur' }
+            { required: true, message: this.$t('m.newPrivate.selectDateRange'), trigger: 'blur' }
           ]
         }
       }
@@ -159,14 +164,14 @@
       },
       handleFormatError (file) {
         this.$Notice.warning({
-          title: 'The file format is incorrect',
-          desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+          title: this.$t('m.newPrivate.fromatIncorrect'),
+          desc: this.$t('m.newPrivate.fileFormat') + file.name + this.$t('m.newPrivate.isINcorrect')
         });
       },
       handleMaxSize (file) {
         this.$Notice.warning({
-          title: 'Exceeding file size limit',
-          desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+          title: this.$t('m.newPrivate.exceeding'),
+          desc: this.$t('m.newPrivate.file') + file.name + this.$t('m.newPrivate.tooLarge')
         });
       },
       onAddCreative() {
@@ -186,7 +191,7 @@
               })
             }
             if (creatives.length === 0) {
-              reject(new Error('please upload creatives'))
+              reject(new Error(this.$t('m.newPrivate.uploadCreative')))
               return
             }
             const payload = {

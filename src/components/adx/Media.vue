@@ -10,7 +10,7 @@
       </a>
       <p>{{ media.desc }}</p>
     </Card>
-    <StatsChart ref="statsChart" title="Media Stats" :media-id="mediaId" :height="300"></StatsChart>
+    <StatsChart ref="statsChart" :title="this.$t('m.mediatit')" :media-id="mediaId" :height="300"></StatsChart>
     <AdzoneTable ref="adzoneTable" :media="media"></AdzoneTable>
   </div>
 </template>

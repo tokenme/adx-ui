@@ -11,7 +11,7 @@
       </a>
     </Col>
     <Col span="12">
-      <h4>Embed Code</h4>
+      <h4>{{$t('m.adzoneExp.em')}}</h4>
       <Input 
         v-model="row.embed" 
         disabled 
@@ -37,7 +37,7 @@
     },
     methods: {
       onCopySuccess(e) {
-        this.$Message.success('embeding code has been copied')
+        this.$Message.success(this.$t('m.adzoneExp.suc'))
       }
     }
   }

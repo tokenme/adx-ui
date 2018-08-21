@@ -16,6 +16,7 @@ import Media from './components/media/Media.vue'
 import PrivateAuction from './components/media/PrivateAuction.vue'
 import store from './store'
 import * as types from './store/mutation-types'
+import VueI18n from 'vue-i18n'
 
 iview.lang('en-US')
 
@@ -23,7 +24,14 @@ Vue.use(iview)
 Vue.use(VueRouter)
 Vue.use(VueClipboard)
 Vue.use(vueCalendar)
-
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: localStorage.lang ? localStorage.lang : 'en-US',
+  messages: {
+    'zh-CN': require('./locale/lang/zh.js'),
+    'en-US': require('./locale/lang/en.js')
+  }
+})
 const router = new VueRouter({
   routes: [{
     name: 'login',
@@ -150,6 +158,7 @@ try {
     el: '#app',
     router: router,
     store: store,
+    i18n,
     render: h => h(App)
   })
 } catch (e) {

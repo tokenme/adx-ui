@@ -2,8 +2,8 @@
   <div>
     <Modal
         v-model="showAddPrivateAuction"
-        title="New Private Auction"
-        ok-text="Submit"
+        :title="this.$t('m.adZoneTable.title')"
+        :ok-text="this.$t('m.adZoneTable.okText')"
         loading
         @on-ok="onAddPrivateAuction"
         @on-visible-change="restPrivateAuction">
@@ -11,7 +11,7 @@
     </Modal>
     <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
       <p slot="title">
-        Adzone List
+        {{$t('m.adZoneTable.adZoneList')}}
       </p>
       <SearchToolbar slot="extra" ref="searchToolbar" @searchAdzones="onSearch" :show-domain="!media"></SearchToolbar>
       <p>
@@ -75,7 +75,7 @@
               ])
             }
           }, {
-            title: 'Media',
+            title: this.$t('m.adZoneTable.media'),
             key: 'media',
             align: 'center',
             render: (h, params) => {
@@ -92,7 +92,7 @@
               }, params.row.media.title)
             }
           }, {
-            title: 'Size',
+            title: this.$t('m.adZoneTable.size'),
             key: 'size',
             align: 'center',
             width: 100,
@@ -100,17 +100,17 @@
               return h('span', params.row.size.width + 'x' + params.row.size.height)
             }
           }, {
-            title: 'Rolling',
+            title: this.$t('m.adZoneTable.rolling'),
             key: 'rolling',
             align: 'right',
             width: 100
           }, {
-            title: 'Suggest Price (Ether/Day)',
+            title: this.$t('m.adZoneTable.suggest'),
             key: 'suggest_cpt',
             align: 'right',
             width: 200
           }, {
-            title: 'Action',
+            title: this.$t('m.adZoneTable.action'),
             key: 'action',
             align: 'center',
             size: 80,
@@ -130,7 +130,7 @@
                       this.onAdzoneClick(params.row)
                     }
                   }
-                }, 'View'),
+                }, this.$t('m.view')),
                 h('Button', {
                   props: {
                     type: 'primary',
@@ -145,7 +145,7 @@
                       this.onBuy(params.row)
                     }
                   }
-                }, 'Buy')
+                }, this.$t('m.byu'))
               ])
             }
           }
@@ -220,7 +220,7 @@
         }, err => {
           this.showAddPrivateAuction = false
           if (err.code === 600) {
-            this.$Modal.error({title: 'Error', content: 'You don\'t have enough balance, please deposit before making order.'})
+            this.$Modal.error({title: 'Error', content: this.$t('m.adZoneTable.noenough')})
             return
           } else if (err.code === 401) {
             this.$router.push({

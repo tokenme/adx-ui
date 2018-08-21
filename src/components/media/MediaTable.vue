@@ -13,7 +13,7 @@
         loading: false,
         columns: [
           {
-            title: 'Title', 
+            title: this.$t('m.mt.tit'), 
             key: 'title',
             render: (h, params) => {
               return h('Poptip', {
@@ -36,7 +36,7 @@
               ])
             }
           }, {
-            title: 'Domain', 
+            title: this.$t('m.mt.do'), 
             key: 'domain',
             render: (h, params) => {
               return h('Button', {
@@ -51,7 +51,7 @@
               }, params.row.domain);
             }
           }, {
-            title: 'Status',
+            title: this.$t('m.mt.st'),
             key: 'online_status',
             render: (h, params) => {
               return h('Tag', {
@@ -61,13 +61,13 @@
               }, this.statusTagText(params.row))
             }
           }, {
-            title: 'Created Time',
+            title: this.$t('m.mt.ct'),
             key: 'inserted_at'
           }, {
-            title: 'Updated Time',
+            title: this.$t('m.mt.ut'),
             key: 'updated_at'
           }, {
-            title: 'Action',
+            title: this.$t('m.mt.ac'),
             key: 'action',
             align: 'center',
             render: (h, params) => {
