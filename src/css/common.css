@@ -40,3 +40,10 @@
     background-color: #f7f7f7;
     color: #999;
 }
+.ivu-select-selected-value{
+    color: #495060;
+}
+.ivu-select-item-selected{
+    color: black;
+    background: none
+}

@@ -253,7 +253,7 @@
         }
         this.$Modal.confirm({
           title: 'Warning',
-          content: "<p>{{$t('m.pat.if')}}</p>",
+          content: this.$t('m.pat.if'),
           loading: true,
           okText: 'Yes',
           cancelText: 'No',

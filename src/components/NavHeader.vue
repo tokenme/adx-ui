@@ -13,7 +13,7 @@
           <template v-if="logined">
             <MenuItem name="account">
               <Icon type="ios-person"></Icon>
-              {{ user.email }}
+              {{ user.mobile ? user.mobile : user.email }}
             </MenuItem>
             <MenuItem name="logout">
               <Icon type="log-out"></Icon>

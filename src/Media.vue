@@ -21,7 +21,10 @@
 
 <script>
   import NavHeader from './components/NavHeader.vue'
-
+  import {
+    GEOIP_REQUEST,
+    GEOIP_LOCAL
+  } from './store/mutation-types'
   export default {
     components: {
       'nav-header': NavHeader
@@ -30,6 +33,20 @@
       breadcrumb() {
         return this.$store.getters['breadcrumb']
       }
+    },
+    methods: {
+      getGeoIP() {
+        this.$store.dispatch(GEOIP_REQUEST).then((res) => {
+          console.log(res)
+        })
+      },
+      getLocalIp() {
+        console.log('xxxxxx' + localStorage.countryCode)
+        this.$store.dispatch(GEOIP_LOCAL, localStorage.countryCode)
+      }
+    },
+    created() {
+      this.getGeoIP()
     }
   }
 </script>

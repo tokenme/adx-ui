@@ -42,7 +42,17 @@ export const m = {
     noMatch: 'The two input passwords do not match!',
     invalid: 'Invalid email address',
     activation: 'Activation email has been sent, please check your mailbox',
-    noActivate: 'Account already existed, but did not activate. Do you want to re-send activation email?'
+    noActivate: 'Account already existed, but did not activate. Do you want to re-send activation email?',
+    em: 'Email registration',
+    mo: 'Mobile registration',
+    phone: 'phone number',
+    va: 'Verification Code',
+    check: 'Please verify cell phone number.',
+    send: 'Send verification code',
+    succ: 'Registration is successful. The login page is about to jump.',
+    fail: 'login has failed',
+    sendfail: 'Failure to send verification code',
+    ok: 'OK'
   },
   login: {
     log: 'Login',
@@ -50,7 +60,12 @@ export const m = {
     resetPassword: 'Reset Password',
     forgetPassword: 'Forget password?',
     email: 'Please enter your email...',
-    resetEmail: 'Reset password email has been sent, please check your mailbox'
+    resetEmail: 'Reset password email has been sent, please check your mailbox',
+    em: 'Email Login',
+    mo: 'Mobile login',
+    phone: 'phone number',
+    inPhone: 'Please fill in the phone number.',
+    fa: 'The phone number is not correct.'
   },
   editTable: {
     sureDelete: 'Are you sure about delete this?'

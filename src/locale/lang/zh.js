@@ -42,7 +42,17 @@ export const m = {
     noMatch: '两次密码不符',
     invalid: '无效电子邮件地址',
     activation: '激活邮件已发送，请检查邮箱',
-    noActivate: '帐户已经存在，但没有激活。您想重新发送激活电子邮件吗？'
+    noActivate: '帐户已经存在，但没有激活。您想重新发送激活电子邮件吗？',
+    em: '邮箱注册',
+    mo: '手机注册',
+    phone: '手机号',
+    va: '验证码',
+    check: '请验证手机号',
+    send: '发送验证码',
+    succ: '注册成功，即将跳转登录页',
+    fail: '注册失败',
+    sendfail: '发送验证码失败',
+    ok: '确定'
   },
   login: {
     log: '登录',
@@ -50,7 +60,12 @@ export const m = {
     resetPassword: '重置密码',
     forgetPassword: '忘记密码？',
     email: '请输入你的邮箱...',
-    resetEmail: '重置密码电子邮件已发送，请检查邮箱'
+    resetEmail: '重置密码电子邮件已发送，请检查邮箱',
+    em: '邮箱登录',
+    mo: '手机登录',
+    phone: '手机号',
+    inPhone: '请填写手机号',
+    fa: '手机号格式不正确'
   },
   editTable: {
     sureDelete: '你确定删除这个吗?'
