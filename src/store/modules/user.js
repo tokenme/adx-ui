@@ -1,11 +1,19 @@
 import * as types from '../mutation-types'
 import userAPI from '../../api/user'
-
+import { countries } from '../../twilio-countries'
 // initial state
 // shape: [{ id, quantity }]
 const state = {
   jwt: null,
-  user: null
+  user: null,
+  geoip: null,
+  countryCode: 0,
+  ipCountry: null,
+  loading: false,
+  errDialog: null,
+  showErrDialog: false,
+  snackbar: null,
+  showSnackbar: false
 }
 
 // getters
@@ -15,7 +23,19 @@ const getters = {
   userInfo: state => state.user,
   isPublisher: state => state.user !== null && state.user.is_publisher > 0,
   isAdmin: state => state.user !== null && state.user.is_admin > 0,
-  isAdvertiser: state => state.user !== null && state.user.is_advertiser > 0
+  isAdvertiser: state => state.user !== null && state.user.is_advertiser > 0,
+  countryCode: state => {
+    // console.log('state:', state)
+    // console.log('2222222', state.countryCode)
+    if (state.countryCode > 0) {
+      return state.countryCode
+    }
+    if (state.ipCountry) {
+      return state.ipCountry.code
+    }
+    return 0
+  },
+  country: state => state.ipCountry.name
 }
 
 // actions
@@ -120,6 +140,69 @@ const actions = {
       commit(types.LOGOUT_SUCCESS)
       resolve()
     })
+  },
+  [types.GET_COUNTRY_CODE_REQUEST]({
+    commit,
+    state
+  }) {
+    return new Promise((resolve, reject) => {
+      let countryCode = localStorage.getItem('countryCode')
+      commit(types.CHANGE_COUNTRY_CODE_REQUEST, countryCode)
+      resolve(countryCode)
+    })
+  },
+  [types.CHANGE_COUNTRY_CODE_REQUEST]({
+    commit,
+    state
+  }, countryCode) {
+    return new Promise((resolve, reject) => {
+      localStorage.setItem('countryCode', countryCode)
+      commit(types.CHANGE_COUNTRY_CODE_REQUEST, countryCode)
+      resolve(countryCode)
+    })
+  },
+  [types.GEOIP_REQUEST]({
+    commit,
+    state
+  }) {
+    return new Promise((resolve, reject) => {
+      userAPI.geoip().then((response) => {
+        if (response.code) {
+          commit(types.GEOIP_FAILURE, response)
+          reject(response)
+          return
+        }
+        commit(types.GEOIP_SUCCESS, response)
+        resolve(response)
+      })
+    })
+  },
+  [types.SHOW_ERROR_DIALOG]({
+    commit,
+    state
+  }, error) {
+    commit(types.SHOW_ERROR_DIALOG, error)
+  },
+  [types.GEOIP_LOCAL](state, value) {
+    state.countryCode = value
+    // console.log(state.countryCode)
+    // console.log(333)
+  },
+  [types.REGISTER_REQUESTPHONE]({
+    commit,
+    state
+  }, userInfo) {
+    return new Promise((resolve, reject) => {
+      userAPI.registerPhone(userInfo).then((response) => {
+        if (response.code) {
+          commit(types.REGISTER_FAILUREPHONE, response)
+          reject(response)
+          return
+        }
+        commit(types.REGISTER_SUCCESSPHONE, response)
+        resolve(response)
+      })
+    })
   }
 }
 
@@ -135,6 +218,7 @@ const mutations = {
   [types.USER_INFO_SUCCESS](state, userInfo) {
     state.user = userInfo
   },
+  
 
   [types.USER_INFO_FAILURE](state, err) {
     if (err.code === 401) {
@@ -167,7 +251,31 @@ const mutations = {
 
   [types.REGISTER_SUCCESS](state) {},
 
-  [types.REGISTER_FAILURE](state, err) {}
+  [types.REGISTER_FAILURE](state, err) {},
+  [types.CHANGE_COUNTRY_CODE_REQUEST](state, countryCode) {
+    state.countryCode = parseInt(countryCode)
+  },
+  [types.GEOIP_SUCCESS](state, geoip) {
+    if (geoip && geoip.Country) {
+      for (const c of countries) {
+        if (geoip.Country.IsoCode === c.iso) {
+          state.ipCountry = c
+          break
+        }    
+      }
+    }
+    
+    state.geoip = geoip
+    // console.log('111', state.ipCountry)
+  },
+  [types.GEOIP_FAILER](state, err) { },
+  [types.SHOW_ERROR_DIALOG](state, error) {
+    state.errDialog = error
+    state.showErrDialog = true
+  },
+  [types.REGISTER_SUCCESSPHONE](state) {},
+
+  [types.REGISTER_FAILUREPHONE](state, err) {}
 
 }
 

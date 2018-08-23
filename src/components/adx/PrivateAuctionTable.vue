@@ -310,7 +310,7 @@
         }
         this.$Modal.confirm({
           title: this.$t('m.pata.war'),
-          content: "<p>{{$t('m.pata.the')}}</p>",
+          content: this.$t('m.pata.the'),
           loading: true,
           okText: 'Yes',
           cancelText: 'No',
