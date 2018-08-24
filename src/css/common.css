@@ -45,5 +45,10 @@
 }
 .ivu-select-item-selected{
     color: black;
-    background: none
+}
+*{
+    outline: none !important;
+}
+.ivu-select-dropdown{
+    margin: 0;
 }

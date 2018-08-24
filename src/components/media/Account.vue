@@ -2,7 +2,7 @@
   <div>
     <Card v-if="user" :bordered="false" :dis-hover="true" :shadow="false">
       <h2 slot="title">
-        {{ user.email }}
+        {{ user.mobile ? user.mobile : user.email }}
       </h2>
       <p>
         <dl>

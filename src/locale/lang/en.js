@@ -28,6 +28,10 @@ export const m = {
   CTR: 'CTR',
   view: 'View',
   byu: 'Buy',
+  unv: 'Unverified',
+  vi: 'View',
+  edt: 'Edit',
+  vy: 'Verify',
   regis: {
     place_email: 'Email',
     place_password: 'Password',
