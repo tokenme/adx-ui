@@ -117,8 +117,6 @@
         loginRulePhone: {
           mobile: [
             { validator: validatePhone, trigger: 'blur' }
-            // { required: true, message: '请输入手机号', trigger: 'blur' },
-            // { type: 'mobile', message: '手机号不正确', trigger: 'blur' }
           ],
           passwd: [
             { validator: validatePass, trigger: 'blur' }
@@ -142,7 +140,6 @@
         },
         set(value) {
           this.$store.dispatch(types.CHANGE_COUNTRY_CODE_REQUEST, value)
-          console.log(1)
         }
       }
     },

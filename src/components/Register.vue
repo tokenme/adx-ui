@@ -52,7 +52,6 @@
               <FormItem prop="verify_code">
                 <Input type="text" v-model="registerPhoneForm.verify_code" :placeholder="this.$t('m.regis.va')" >
                   <Icon type="ios-email-outline" slot="prepend"></Icon>
-                  <!-- <Icon type="ios-phone-portrait" slot="prepend" ></Icon> -->
                 </Input>
               </FormItem>
               <FormItem prop="passwd">
@@ -206,13 +205,10 @@
     computed: {
       countryCode: {
         get() {
-          // console.log('11111', this.$store.getters['countryCode'])
           return this.$store.getters['countryCode']
         },
         set(value) {
-          // console.log('3333', value)
           this.$store.dispatch(types.CHANGE_COUNTRY_CODE_REQUEST, value)
-          // console.log(1)
         }
       },
       country() {
@@ -241,7 +237,6 @@
               this.loading = false
               this.$Modal.success({
                 title: this.$t('m.success'),
-                // content: "<p>{{$t('m.regis.activation')}}</p>",
                 content: this.$t('m.regis.activation'),
                 onOk: () => {
                   this.$router.push({name: 'login'})
@@ -304,15 +299,6 @@
               content: this.$t('m.regis.fail'),
               loading: true,
               okText: this.$t('m.send')
-              // onOk: () => {
-              //   this.resendActivationEmail(payload.email).then(res => {
-              //     this.$Modal.remove()
-              //     this.$Message.info(this.$t('m.regis.activation'))
-              //   }, err => {
-              //     this.$Modal.remove()
-              //     this.$Message.error(err.message || this.$t('m.unKnown'))
-              //   })
-              // }
             })
           } else {
             this.$Modal.error({title: this.$t('m.error'), content: err.message ? err.message : this.$t('m.unKnown')})
@@ -356,7 +342,6 @@
           this.authSending = false
           if (response.code) {
             this.smsCountdown = 0
-            // this.showErrorDialog({ title: '发送验证码失败', message: response.message })
             this.$Modal.confirm({
               title: this.$t('m.regis.sendfail'),
               content: response.message,

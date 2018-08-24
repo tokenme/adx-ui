@@ -86,7 +86,7 @@
                       this.onMediaClick(params.row)
                     }
                   }
-                }, 'View'),
+                }, this.$t('m.vi')),
                 h('Button', {
                   props: {
                     icon: 'edit',
@@ -100,7 +100,7 @@
                       this.onEditClick(params.row)
                     }
                   }
-                }, 'Edit'),
+                }, this.$t('m.edt')),
                 this.statusBtn(h, params.row)
               ])
             }
@@ -125,11 +125,11 @@
       }, 
       statusTagText(row) {
         if (row.verified === 0) {
-          return 'Unverified'
+          return this.$t('m.unv')
         } else if (row.online_status === 0) {
-          return 'Offline'
+          return this.$t('m.of')
         } 
-        return 'Online'
+        return this.$t('m.onl')
       },
       statusBtn(h, row) {
         if (row.verified === 0) {
@@ -143,7 +143,7 @@
                 this.onVerify(row)
               }
             }
-          }, 'Verify')
+          }, this.$t('m.vy'))
         } else if (row.online_status === 0) {
           return h('Button', {
             props: {
@@ -156,7 +156,7 @@
                 this.onChangeStatus(row, 1)
               }
             }
-          }, 'Online')
+          }, this.$t('m.onl'))
         } else {
           return h('Button', {
             props: {
@@ -169,7 +169,7 @@
                 this.onChangeStatus(row, 0)
               }
             }
-          }, 'Offline')
+          }, this.$t('m.of'))
         }
       },
       onMediaClick(row) {

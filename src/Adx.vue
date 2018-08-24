@@ -37,20 +37,13 @@
     methods: {
       getGeoIP() {
         this.$store.dispatch(GEOIP_REQUEST).then((res) => {
-          console.log(res)
         })
       },
       getLocalIp() {
-        console.log('xxxxxx' + localStorage.countryCode)
         this.$store.dispatch(GEOIP_LOCAL, localStorage.countryCode)
       }
     },
     created() {
-      // if (!localStorage.countryCode) {
-      //   this.getGeoIP()            
-      // } else {
-      //   this.getLocalIp()
-      // }
       this.getGeoIP()
     }
   }
