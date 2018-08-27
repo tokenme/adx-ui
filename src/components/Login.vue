@@ -42,7 +42,7 @@
             <Select v-model="countryCode" >
               <Option v-for="item of countries" :key="item.name" :value="item.code">{{item.name}}, +{{item.code}}</Option>
             </Select>
-          <FormItem prop="">
+          <FormItem prop="mobile">
             <Input type="text" v-model="loginFormPhone.mobile" :placeholder="this.$t('m.login.phone')">
               <Icon type="ios-email-outline" slot="prepend"></Icon>
             </Input>
@@ -95,9 +95,9 @@
       }
       const validatePhone = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请填写手机号'))
-        } else if (/^\d{1,11}$/.test(value)) {
-          callback(new Error('手机号不正确'))
+          callback(new Error(this.$t('m.login.inPhone')))
+        } else if (/^\d{1,10}$/.test(value)) {
+          callback(new Error(this.$t('m.login.fa')))
         } else {
           callback()
         }

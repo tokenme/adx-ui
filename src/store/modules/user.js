@@ -256,17 +256,26 @@ const mutations = {
     state.countryCode = parseInt(countryCode)
   },
   [types.GEOIP_SUCCESS](state, geoip) {
-    if (geoip && geoip.Country) {
-      for (const c of countries) {
-        if (geoip.Country.IsoCode === c.iso) {
-          state.ipCountry = c
+    if (localStorage.countryCode) {
+      let countryCode = localStorage.countryCode;
+      for (const item of countries) {
+        if (Number(countryCode) === item.code) {
+          state.ipCountry = item
           break
         }    
+      }
+    } else {
+      if (geoip && geoip.Country) {
+        for (const c of countries) {
+          if (geoip.Country.IsoCode === c.iso) {
+            state.ipCountry = c
+            break
+          }    
+        }
       }
     }
     
     state.geoip = geoip
-    // console.log('111', state.ipCountry)
   },
   [types.GEOIP_FAILER](state, err) { },
   [types.SHOW_ERROR_DIALOG](state, error) {
