@@ -44,7 +44,7 @@
                 <Select v-model="countryCode" >
                   <Option v-for="item of countries " :key="item.name" :value="item.code">{{item.name}}, +{{item.code}}</Option>
                 </Select>
-              <FormItem prop="">
+              <FormItem prop="mobile">
                 <Input v-model="registerPhoneForm.mobile" @change="onMobileChange"  required :placeholder="this.$t('m.regis.phone')" >
                   <Button slot="append" type="primary" :loading="authSending" :disabled="smsCountdown>0 || !registerPhoneForm.mobile || !countryCode || verifing" @click="authSend">{{ authSendBtn }}</Button>
                 </Input>
@@ -136,10 +136,11 @@
         }
       }
       const validatePhone = (rule, value, callback) => {
+        console.log(value)
         if (value === '') {
-          callback(new Error('请填写手机号'))
-        } else if (/^\d{1,14}$/.test(value)) {
-          callback(new Error('手机号不正确'))
+          callback(new Error(this.$t('m.login.inPhone')))
+        } else if (/^\d{1,10}$/.test(value)) {
+          callback(new Error(this.$t('m.login.fa')))
         } else {
           callback()
         }
@@ -178,7 +179,7 @@
           ]
         },
         registerPhoneRule: {
-          Phone: [
+          mobile: [
             { validator: validatePhone, trigger: 'blur' }
           ],
           verify_code: [
@@ -190,12 +191,6 @@
           repasswd: [
             { validator: validatePassCheckPhone, trigger: 'blur' }
           ]
-        },
-        countryFilter (item, queryText, itemText) {
-          const hasValue = val => val != null ? val : ''
-          const text = hasValue(item.name)
-          const query = hasValue(queryText)
-          return text.toString().toLowerCase().indexOf(query.toString().toLowerCase()) > -1
         },
         authSending: false,
         verifing: false,
@@ -210,9 +205,6 @@
         set(value) {
           this.$store.dispatch(types.CHANGE_COUNTRY_CODE_REQUEST, value)
         }
-      },
-      country() {
-        return this.$store.getters['country']
       },
       authSendBtn() {
         if (this.smsCountdown <= 0) {

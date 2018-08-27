@@ -5,8 +5,10 @@
         :title="this.$t('m.dash.title')"
         :ok-text="this.$t('m.dash.okText')"
         loading
+        footer-hide='true'
         @on-ok="onAddMedia">
         <AddMedia ref="addMedia"></AddMedia>
+        <Button type="primary" style="margin-left:435px" @click="onAddMedia" :loading="loading">{{$t('m.dash.okText')}}</Button>
     </Modal>
     <Modal
         v-model="showEditMedia"
@@ -61,7 +63,8 @@
         showAddMedia: false,
         showEditMedia: false,
         mediaToVerify: null,
-        mediaToEdit: null
+        mediaToEdit: null,
+        loading: false
       }
     },
     computed: {
