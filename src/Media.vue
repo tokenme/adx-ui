@@ -22,8 +22,7 @@
 <script>
   import NavHeader from './components/NavHeader.vue'
   import {
-    GEOIP_REQUEST,
-    GEOIP_LOCAL
+    GEOIP_REQUEST
   } from './store/mutation-types'
   export default {
     components: {
@@ -37,12 +36,7 @@
     methods: {
       getGeoIP() {
         this.$store.dispatch(GEOIP_REQUEST).then((res) => {
-          console.log(res)
         })
-      },
-      getLocalIp() {
-        console.log('xxxxxx' + localStorage.countryCode)
-        this.$store.dispatch(GEOIP_LOCAL, localStorage.countryCode)
       }
     },
     created() {

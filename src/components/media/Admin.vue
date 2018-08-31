@@ -19,26 +19,30 @@
         <EditMedia ref="editMedia" :media="mediaToEdit"></EditMedia>
     </Modal>
     <MediaVerify ref="mediaVerifyModal" :media="mediaToVerify" @mediaVerified="onMediaVerified" @mediaVerifyFailed="onMediaVerifyFailed"></MediaVerify>
-    <StatsChart ref="statsChart" :title="this.$t('m.dash.acc')" :height="300"></StatsChart>
-    <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
-      <p slot="title">
-        {{$t('m.dash.me')}}
-      </p>
-      <Button slot="extra" type="primary" icon="ios-plus" @click="showAddMedia=true">
-        {{$t('m.dash.add')}}
-      </Button>
-      <p>
-        <MediaTable ref="mediaTable" @mediaVerify="onMediaVerify" @mediaEdit="onMediaEdit" v-if="medias"></MediaTable>
-        <Row type="flex" justify="center" v-else>
-          <Col style="text-align:center">
-            <p style="padding:20px 0">{{$t('m.dash.noWeb')}}</p>
-            <Button type="primary" icon="ios-plus" size="large" @click="showAddMedia=true">
-              {{$t('m.dash.add')}}
-            </Button>
-          </Col>
-        </Row>
-      </p>
-    </Card>
+    <div>
+      <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
+        <p slot="title">
+          {{$t('m.dash.me')}}
+        </p>
+        <Button slot="extra" type="primary" icon="ios-plus" @click="showAddMedia=true">
+          {{$t('m.dash.add')}}
+        </Button>
+        <p>
+          <ALLMediaTable ref="mediaTable" @mediaVerify="onMediaVerify" @mediaEdit="onMediaEdit" v-if="medias">
+          </ALLMediaTable>
+          <Row type="flex" justify="center" v-else>
+            <Col style="text-align:center">
+              <p style="padding:20px 0">{{$t('m.dash.noWeb')}}</p>
+              <Button type="primary" icon="ios-plus" size="large" @click="showAddMedia=true">
+                {{$t('m.dash.add')}}
+              </Button>
+            </Col>
+          </Row>
+        </p>
+      </Card>
+      <Page :total="total" :page-size='15' @on-change='setNum' style="text-align:center;margin-top:10px"/>
+    </div>
+    
   </div>
 </template>
 
@@ -47,7 +51,7 @@
   import AddMedia from './AddMedia.vue'
   import EditMedia from './EditMedia.vue'
   import MediaVerify from './MediaVerify.vue'
-  import MediaTable from './MediaTable.vue'
+  import ALLMediaTable from './ALLMediaTable.vue'
   import StatsChart from '../StatsChart.vue'
 
   export default {
@@ -55,7 +59,7 @@
       'AddMedia': AddMedia,
       'EditMedia': EditMedia,
       'MediaVerify': MediaVerify,
-      'MediaTable': MediaTable,
+      'ALLMediaTable': ALLMediaTable,
       'StatsChart': StatsChart
     },
     data() {
@@ -72,7 +76,10 @@
         return this.$store.getters['token']
       },
       medias() {
-        return this.$store.getters['medias']
+        return this.$store.getters['mediaList']
+      },
+      total() {
+        return this.$store.getters['total']
       }
     },
     methods: {
@@ -112,10 +119,21 @@
           this.showEditMedia = false
           this.$Message.error(err.message || 'unknown error')
         })
+      },
+      setNum(index) {
+        // this.$Spin.show();
+        this.$store.commit(types.ALL_MEDIA_FAILURE)
+        this.$store.dispatch(types.ALL_MEDIA, {token: this.token, page: index}).then(res => {
+          // this.$Spin.hide();
+        })
       }
     },
     created() {
-      this.$store.dispatch(types.UPDATE_CURRENT_ROUTE, 'dashboard')
+      const user = this.$store.getters['userInfo']
+      if (user.is_admin === 0) {
+        this.$router.push({path: '/'})
+      }
+      this.setNum(1)
     }
   }
 </script>

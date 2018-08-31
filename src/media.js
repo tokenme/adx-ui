@@ -14,6 +14,7 @@ import Dashboard from './components/media/Dashboard.vue'
 import Account from './components/media/Account.vue'
 import Media from './components/media/Media.vue'
 import PrivateAuction from './components/media/PrivateAuction.vue'
+import Admin from './components/media/Admin.vue'
 import store from './store'
 import * as types from './store/mutation-types'
 import VueI18n from 'vue-i18n'
@@ -47,7 +48,17 @@ const router = new VueRouter({
     meta: {
       title: 'register'
     }
-  }, {
+  },
+  {
+    name: 'admin',
+    path: '/admin',
+    component: Admin,
+    meta: {
+      title: 'admin',
+      auth: true
+    }
+  },
+  {
     name: 'reset-passwd',
     path: '/reset-passwd/:code',
     component: ResetPassword,
@@ -146,6 +157,7 @@ router.beforeEach((to, from, next) => {
   }
   runner()
 })
+
 
 router.afterEach((to) => {
   iview.LoadingBar.finish()

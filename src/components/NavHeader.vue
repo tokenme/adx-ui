@@ -11,6 +11,10 @@
             {{ item.name }}
           </MenuItem>
           <template v-if="logined">
+            <MenuItem name="admin" v-if="user.is_admin===1">
+              <Icon type="ios-people"></Icon>
+              {{$t('m.ht')}}
+            </MenuItem>
             <MenuItem name="account">
               <Icon type="ios-person"></Icon>
               {{ user.mobile ? user.mobile : user.email }}
@@ -79,6 +83,12 @@
         if (name === 'account') {
           this.$router.push({
             path: '/account'
+          })
+          return
+        }
+        if (name === 'admin') {
+          this.$router.push({
+            path: '/admin'
           })
           return
         }

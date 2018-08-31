@@ -4,39 +4,7 @@
       <Card style="margin-top:20px">
         <p slot="title">{{$t('m.login.log')}}</p>
         <Tabs value="name1">
-        <TabPane :label="this.$t('m.login.em')" name="name1">
-          <p>
-          <Form ref="loginForm" :model="loginForm" :rules="loginRule">
-          <FormItem prop="email">
-            <Input type="text" v-model="loginForm.email" :placeholder="this.$t('m.regis.place_email')">
-              <Icon type="ios-email-outline" slot="prepend"></Icon>
-            </Input>
-          </FormItem>
-          <FormItem prop="passwd">
-            <Input type="password" v-model="loginForm.passwd" :placeholder="this.$t('m.regis.place_password')">
-              <Icon type="ios-locked-outline" slot="prepend"></Icon>
-            </Input>
-          </FormItem>
-          <FormItem>
-            <Row type="flex" justify="center" :gutter="24">
-              <Col>
-                <Button type="ghost" @click="gotoRegister">{{$t('m.login.reg')}}</Button>
-              </Col>
-              <Col>
-                <Button type="text" @click="resetPassword">{{$t('m.login.forgetPassword')}}</Button>
-              </Col>
-              <Col>
-                <Button type="primary" :loading="loading" :disabled="loading" @click="onSubmit">
-                  <span v-if="!loading">{{$t('m.login.log')}}</span>
-                  <span v-else>Loading...</span>
-                </Button>
-              </Col>
-            </Row>
-          </FormItem>
-        </Form>
-        </p>
-      </TabPane>
-      <TabPane :label="this.$t('m.login.mo')" name="name2">
+      <TabPane :label="this.$t('m.login.mo')" name="name1">
         <p>
           <Form ref="loginFormPhone" :model="loginFormPhone" :rules="loginRulePhone">
             <Select v-model="countryCode" >
@@ -63,6 +31,38 @@
               <Col>
                 <Button type="primary" :loading="submitting" :disabled="submitting" @click="onSubmitPhone">
                   <span v-if="!submitting">{{$t('m.login.log')}}</span>
+                  <span v-else>Loading...</span>
+                </Button>
+              </Col>
+            </Row>
+          </FormItem>
+        </Form>
+        </p>
+      </TabPane>
+      <TabPane :label="this.$t('m.login.em')" name="name2">
+          <p>
+          <Form ref="loginForm" :model="loginForm" :rules="loginRule">
+          <FormItem prop="email">
+            <Input type="text" v-model="loginForm.email" :placeholder="this.$t('m.regis.place_email')">
+              <Icon type="ios-email-outline" slot="prepend"></Icon>
+            </Input>
+          </FormItem>
+          <FormItem prop="passwd">
+            <Input type="password" v-model="loginForm.passwd" :placeholder="this.$t('m.regis.place_password')">
+              <Icon type="ios-locked-outline" slot="prepend"></Icon>
+            </Input>
+          </FormItem>
+          <FormItem>
+            <Row type="flex" justify="center" :gutter="24">
+              <Col>
+                <Button type="ghost" @click="gotoRegister">{{$t('m.login.reg')}}</Button>
+              </Col>
+              <Col>
+                <Button type="text" @click="resetPassword">{{$t('m.login.forgetPassword')}}</Button>
+              </Col>
+              <Col>
+                <Button type="primary" :loading="loading" :disabled="loading" @click="onSubmit">
+                  <span v-if="!loading">{{$t('m.login.log')}}</span>
                   <span v-else>Loading...</span>
                 </Button>
               </Col>

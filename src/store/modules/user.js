@@ -25,8 +25,6 @@ const getters = {
   isAdmin: state => state.user !== null && state.user.is_admin > 0,
   isAdvertiser: state => state.user !== null && state.user.is_advertiser > 0,
   countryCode: state => {
-    // console.log('state:', state)
-    // console.log('2222222', state.countryCode)
     if (state.countryCode > 0) {
       return state.countryCode
     }
