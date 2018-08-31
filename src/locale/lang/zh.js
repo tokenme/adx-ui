@@ -32,6 +32,7 @@ export const m = {
   vi: '查看',
   edt: '编辑',
   vy: '验证',
+  ht: '管理后台',
   regis: {
     place_email: '邮箱',
     place_password: '密码',

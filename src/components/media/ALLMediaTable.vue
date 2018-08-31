@@ -1,6 +1,6 @@
 <template>
   <div class="mediaTable">
-    <Table border :loading="loading" :columns="columns" :data="medias"></Table>
+      <Table border :loading="loading" :columns="columns" :data="mediaList"></Table>
   </div>
 </template>
 
@@ -114,6 +114,9 @@
       },
       medias() {
         return this.$store.getters['medias']
+      },
+      mediaList() {
+        return this.$store.getters['mediaList']
       }
     },
     methods: {

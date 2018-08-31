@@ -32,6 +32,7 @@ export const m = {
   vi: 'View',
   edt: 'Edit',
   vy: 'Verify',
+  ht: 'Management',
   regis: {
     place_email: 'Email',
     place_password: 'Password',
