@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="left">
-      <div class="ziyuan">{{$t('m.med.res')}}</div>
-      <div class="name">{{media.title}}</div>
+      <!-- <div class="ziyuan">{{$t('m.med.res')}}</div> -->
+      <div class="name" >{{media.title}}</div>
       <Menu theme="dark" active-name="1" style="width:175px" @on-select="selectMenu">
         <MenuItem name="1">
             {{$t('m.med.int')}}
@@ -17,7 +17,12 @@
     </div>
     <div class="right">
       <div class="introduce" v-if="active==1">
-        <a :href="media.domain" target="_blank"><img :src="media.imgurl" alt="" style="width:1006px;height:1146px"></a>
+        <div v-if="media.imgurl === ''" style="width:100%;height:200px;text-align:center;line-height:200px;font-size:16px">暂无媒体介绍,去官网看看 <a :href="media.domain" target="_blank">{{media.domain}}</a>
+        </div>
+        <div v-else>
+          <a :href="media.domain" target="_blank"><img :src="media.imgurl" alt="" style="width:1006px;height:1146px"></a>
+        </div>
+        
       </div>
       <div class="show" v-if="active==2" style="width:1200px;height:700px">
         <Card :bordered="true" :dis-hover='true'>
@@ -60,7 +65,7 @@
             width: 196
           }, {
             title: this.$t('m.med.pos'),
-            key: 'desc',
+            key: 'intro',
             align: 'center',
             width: 219
           }, {
@@ -160,6 +165,7 @@
 .left{
   width: 175px;
   height: 1146px;
+  padding-top: 20px;
   background: #000000;
   float: left;
   .ivu-menu-dark{
@@ -187,6 +193,7 @@
     margin-left: 16px;
     line-height: 45px;
     border-radius: 5px;
+    overflow: hidden;
   }
   
 }

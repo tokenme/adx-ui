@@ -15,23 +15,26 @@
       <p>
         <div style="display:flex;justify-content:space-around">
           <div style="height:410px;background:#fff;width:500px">
-            <p class="show">{{adzone.desc}}</p>
+            <p class="show">{{adzone.intro}}</p>
             <p class="show">{{$t('m.adZone.po')}}：<span>{{adzone.location}}</span></p>
-            <p class="show">{{$t('m.adZone.fl')}}: <span>{{adzone.traffic}}{{$t('m.adZone.vi')}}</span></p>
-            <p class="show">{{$t('m.adZone.of')}}：<span>{{adzone.min_cpt}}ETH/天</span></p>
-            <p class="show">{{$t('m.adZone.si')}}：<span>{{adzone.size.width}} x {{adzone.size.height}}</span></p>
+            <p class="show">{{$t('m.adZone.fl')}}: <span>{{adzone.traffic}} {{$t('m.adZone.vi')}}</span></p>
+            <p class="show">{{$t('m.adZone.of')}}：<span>{{adzone.min_cpt}} ETH/天</span></p>
+            <p class="show">{{$t('m.adZone.si')}}：<span>{{size.width}} x {{size.height}}</span></p>
             <p class="show"> {{$t('m.adZone.ae')}}：<span>{{adzone.advantage}}</span></p>
             <div style="width:100%;text-align:center">
               <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1" style="width:120px;height:34px;border-radius:5px">{{$t('m.adZone.buy')}}</Button>
             </div>
           </div>
-          <div style="">
-            <img :src="adzone.placeholder.img_url" alt="" style="width:390px;height:410px">
+          <div style="width:390px;height:410px">
+            <div v-if="adzone.placeholder != null">
+              <img :src="adzone.placeholder.img_url" alt="" style="width:390px;height:410px">
+            </div>
+            <p v-else style="font-size:16px;line-height:410px">暂无广告位图示 ~</p>
           </div>
         </div>
       </p>
     </Card>
-    <StatsChart ref="statsChart" :title="this.$t('m.adZone.adzoneStats')" :media-id="adzone.media.id" :adzone-id="adzone.id" :height="300" v-if="adzone" style="margin-top:15px"></StatsChart>
+    <StatsChart ref="statsChart" :title="this.$t('m.adZone.adzoneStats')" :media-id="media.id" :adzone-id="adzone.id" :height="300" v-if="adzone" style="margin-top:15px"></StatsChart>
   </div>
 </template>
 
@@ -53,7 +56,9 @@
         spinShow: false,
         showAddPrivateAuction: false,
         adzoneId: 0,
-        adzone: null
+        adzone: {},
+        size: {},
+        media: {}
       }
     },
     computed: {
@@ -121,6 +126,8 @@
             return
           }
           this.adzone = res
+          this.size = res.size
+          this.media = res.media
         })
       },
       onBuy() {
@@ -129,7 +136,7 @@
       onAddPrivateAuction() {
         this.$refs.newPrivateAuction.submit(res => {
           this.showAddPrivateAuction = false
-          this.auctionTable.onSearch()
+          // this.auctionTable.onSearch()
         }, err => {
           this.showAddPrivateAuction = false
           if (err.code === 600) {

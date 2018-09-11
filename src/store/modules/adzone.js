@@ -25,7 +25,6 @@ const actions = {
   }, payload) {
     return new Promise((resolve, reject) => {
       adzoneAPI.list(payload.token, {media_id: payload.media_id}).then((response) => {
-        console.log(response)
         if (response != null && response.code) {
           commit(types.ADZONE_LIST_FAILURE, {media_id: payload.media_id, err: response})
           reject(response)

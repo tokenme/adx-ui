@@ -41,7 +41,7 @@
       <Input v-model="addAdzoneForm.location" type="text"  :placeholder="this.$t('m.addAdzone.pc')"></Input>
     </FormItem>
     <FormItem :label="this.$t('m.addAdzone.fl')" prop="traffic">
-      <Input v-model="addAdzoneForm.traffic" type="text" :placeholder="this.$t('m.addAdzone.ae')"></Input>
+      <Input v-model="addAdzoneForm.traffic" type="text" :placeholder="this.$t('m.addAdzone.adv')"></Input>
     </FormItem>
     <FormItem :label="this.$t('m.addAdzone.ae')" prop="advantage">
       <Input v-model="addAdzoneForm.advantage" type="textarea" :placeholder="this.$t('m.addAdzone.int')"></Input>
