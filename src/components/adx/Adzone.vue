@@ -10,31 +10,28 @@
         @on-visible-change="restPrivateAuction">
         <NewPrivateAuction ref="newPrivateAuction" :adzone="adzone"></NewPrivateAuction>
     </Modal>
-    <Card v-if="adzone" :bordered="false" :dis-hover="true" :shadow="false">
-      <h2 slot="title">
-        {{ adzone.media.title }}[{{this.$t('m.newPrivate.adZoneId')}} {{ adzone.id }}]
-      </h2>
-      <a slot="extra" :href="adzone.media.domain" target="_blank">
-        <Icon type="link"></Icon>
-        {{ adzone.media.domain }}
-      </a>
-      <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1">{{$t('m.adZone.buy')}}</Button>
-      <Row type="flex" justify="space-between">
-        <Col span="10">
-          <p>{{ adzone.desc }}</p>
-          <Row type="flex" justify="start" :gutter="30">
-            <Col>{{$t('m.adZone.size')}} {{ adzone.size.width }}x{{ adzone.size.height }}</Col>
-            <Col>{{$t('m.adZone.rolling')}} {{ adzone.rolling }}</Col>
-            <Col>{{$t('m.adZone.suggest')}} {{ adzone.suggest_cpt }} {{$t('m.adZone.ether')}}</Col>
-          </Row>
-        </Col>
-        <Col span="12">
-          <vue-calendar :events="events" :disabled="disabled" :height="250"></vue-calendar>
-        </Col>
-      </Row>
+    <Card v-if="adzone" :bordered="false" :dis-hover="true" :shadow="false" style="height:520px">
+      <p slot="title">{{$t('m.adZone.ad')}}</p>
+      <p>
+        <div style="display:flex;justify-content:space-around">
+          <div style="height:410px;background:#fff;width:500px">
+            <p class="show">{{adzone.desc}}</p>
+            <p class="show">{{$t('m.adZone.po')}}：<span>{{adzone.location}}</span></p>
+            <p class="show">{{$t('m.adZone.fl')}}: <span>{{adzone.traffic}}{{$t('m.adZone.vi')}}</span></p>
+            <p class="show">{{$t('m.adZone.of')}}：<span>{{adzone.min_cpt}}ETH/天</span></p>
+            <p class="show">{{$t('m.adZone.si')}}：<span>{{adzone.size.width}} x {{adzone.size.height}}</span></p>
+            <p class="show"> {{$t('m.adZone.ae')}}：<span>{{adzone.advantage}}</span></p>
+            <div style="width:100%;text-align:center">
+              <Button slot="extra" type="primary" size="small" icon="ios-cart" @click="onBuy" v-if="adzone.online_status==1 && adzone.media.online_status==1" style="width:120px;height:34px;border-radius:5px">{{$t('m.adZone.buy')}}</Button>
+            </div>
+          </div>
+          <div style="">
+            <img :src="adzone.placeholder.img_url" alt="" style="width:390px;height:410px">
+          </div>
+        </div>
+      </p>
     </Card>
-    <StatsChart ref="statsChart" :title="this.$t('m.adZone.adzoneStats')" :media-id="adzone.media.id" :adzone-id="adzone.id" :height="300" v-if="adzone"></StatsChart>
-    <AuctionTable ref="auctionTable" :media-id="adzone.media.id" :adzone-id="adzone.id" :adzone="adzone" v-if="adzone"></AuctionTable>
+    <StatsChart ref="statsChart" :title="this.$t('m.adZone.adzoneStats')" :media-id="adzone.media.id" :adzone-id="adzone.id" :height="300" v-if="adzone" style="margin-top:15px"></StatsChart>
   </div>
 </template>
 
@@ -124,12 +121,6 @@
             return
           }
           this.adzone = res
-          const breadcrumb = [
-            {name: 'Dashboard', path: '/'},
-            {name: 'Media: ' + this.adzone.media.title, path: '/media/' + this.adzone.media.id},
-            {name: 'AdzoneID: ' + this.adzone.id, path: '/adzone/' + this.adzone.id}
-          ]
-          this.$store.dispatch(types.UPDATE_BREADCRUMB, breadcrumb)
         })
       },
       onBuy() {
@@ -169,3 +160,14 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+.show{
+  margin-bottom: 30px;
+  font-size: 18px;
+  color:#4d4d4d;
+  span{
+    font-size: 14px;
+    color: #7a7a7a
+  }
+}
+</style>

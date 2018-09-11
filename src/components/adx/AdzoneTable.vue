@@ -9,13 +9,28 @@
         @on-visible-change="restPrivateAuction">
         <NewPrivateAuction ref="newPrivateAuction" :adzone="privateAuctionAdzone"></NewPrivateAuction>
     </Modal>
-    <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="0">
+    <Card :bordered="false" :dis-hover="true" :shadow="false" :padding="16">
       <p slot="title">
         {{$t('m.adZoneTable.adZoneList')}}
       </p>
-      <SearchToolbar slot="extra" ref="searchToolbar" @searchAdzones="onSearch" :show-domain="!media"></SearchToolbar>
-      <p>
-        <Table border :loading="loading" :columns="columns" :data="adzones"></Table>
+      <p style="width:823px;height:182px">
+        <Carousel  :v-model="0" loop>
+          <CarouselItem>
+              <img style="width:823px" src="https://static.tianxi100.com/tmm/adx/bt.jpg" alt="">
+          </CarouselItem>
+          <CarouselItem>
+              <img style="width:823px" src="https://static.tianxi100.com/tmm/adx/us.jpg" alt="">
+          </CarouselItem>
+        </Carousel>
+      </p>
+      <p style="padding-top:30px">
+        <SearchToolbar slot="extra" ref="searchToolbar" @searchAdzones="onSearch" :show-domain="!media"></SearchToolbar>
+      </p>
+      <p style="text-align:center">
+        <Table border :loading="loading" :columns="columns" :data="ver===true?adzones:list"></Table>
+        <span style="color:#2d8cf0;display:block;margin-top:40px;cursor: pointer" @click="loadMore()">{{$t('m.adZoneTable.more')}}
+          <Icon type="ios-arrow-down" />
+        </span>
       </p>
     </Card>
   </div>
@@ -34,81 +49,37 @@
     },
     data() {
       return {
+        ver: true,
         loading: false,
         showAddPrivateAuction: false,
         privateAuctionAdzone: null,
+        list: [],
         adzones: [],
+        mediaList: false,
         columns: [
           {
-            type: 'expand',
-            width: 50,
-            render: (h, params) => {
-              return h(ExpendRow, {
-                props: {
-                  row: params.row
-                }
-              })
-            }
-          }, {
             title: 'ID', 
             key: 'id',
-            align: 'left',
-            width: 100,
-            render: (h, params) => {
-              return h('Poptip', {
-                props: {
-                  content: params.row.desc,
-                  trigger: 'hover',
-                  placement: 'right-start'
-                }
-              }, [
-                h('Button', {
-                  props: {
-                    type: 'text'
-                  },
-                  on: {
-                    click: (ev) => { 
-                      this.onAdzoneClick(params.row)
-                    }
-                  }
-                }, params.row.id)
-              ])
-            }
-          }, {
-            title: this.$t('m.adZoneTable.media'),
-            key: 'media',
             align: 'center',
-            render: (h, params) => {
-              return h('Button', {
-                props: {
-                  type: 'text',
-                  icon: 'link'
-                },
-                on: {
-                  click: () => {
-                    this.onMediaClick(params.row.media)
-                  }
-                }
-              }, params.row.media.title)
-            }
-          }, {
-            title: this.$t('m.adZoneTable.size'),
-            key: 'size',
-            align: 'center',
-            width: 100,
-            render: (h, params) => {
-              return h('span', params.row.size.width + 'x' + params.row.size.height)
-            }
-          }, {
-            title: this.$t('m.adZoneTable.rolling'),
-            key: 'rolling',
-            align: 'right',
             width: 100
           }, {
-            title: this.$t('m.adZoneTable.suggest'),
-            key: 'suggest_cpt',
-            align: 'right',
-            width: 200
+            title: this.$t('m.adZoneTable.media'),
+            key: 'media_name',
+            align: 'center'
+          }, {
+            title: this.$t('m.adZoneTable.acco'),
+            key: 'adzone_count',
+            align: 'center',
+            width: 150
+          }, {
+            title: this.$t('m.adZoneTable.qujian'),
+            key: 'qujian',
+            align: 'center',
+            width: 200,
+            render: (h, params) => {
+              const str = params.row.low_price + '~' + params.row.high_price
+              return h('span', str)
+            }
           }, {
             title: this.$t('m.adZoneTable.action'),
             key: 'action',
@@ -126,26 +97,11 @@
                     marginRight: '5px'
                   },
                   on: {
-                    click: (ev) => { 
-                      this.onAdzoneClick(params.row)
+                    click: (ev) => {
+                      this.onMediaClick(params.row)
                     }
                   }
-                }, this.$t('m.view')),
-                h('Button', {
-                  props: {
-                    type: 'primary',
-                    size: 'small',
-                    icon: 'ios-cart'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.onBuy(params.row)
-                    }
-                  }
-                }, this.$t('m.byu'))
+                }, this.$t('m.view'))
               ])
             }
           }
@@ -161,6 +117,9 @@
       }
     },
     methods: {
+      loadMore() {
+        this.ver = !this.ver
+      },
       getAdzones(filter) {
         return new Promise((resolve, reject) => {
           const payload = {
@@ -171,18 +130,19 @@
               reject(res)
               return
             }
-            resolve(res || [])
+            resolve(res.Data || [])
           })
         })
       },
-      onSearch(filter) {
+      onSearch(filter, num) {
         this.loading = true
         if (this.media) {
           filter.media_id = this.media.id
         }
         this.getAdzones(filter).then(res => {
           this.loading = false
-          this.adzones = res
+          this.adzones = res.slice(0, 3)
+          this.list = res
         }, err => {
           this.loading = false
           if (err.code === 401) {
@@ -239,7 +199,7 @@
       }
     },
     mounted() {
-      this.onSearch({})
+      this.onSearch({}, true)
     }
   }
 </script>

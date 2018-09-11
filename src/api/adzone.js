@@ -104,7 +104,7 @@ export default {
     })
   },
   search(token, payload) {
-    return axios.get('/adzone/search', {
+    return axios.get('/adzone/MediaList', {
       params: payload,
       headers: {
         'Authorization': 'Bearer ' + token

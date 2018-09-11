@@ -33,6 +33,9 @@ export const m = {
   edt: 'Edit',
   vy: 'Verify',
   ht: 'Management',
+  candy: 'Airdrop Candy',
+  week: 'This data is weekly data',
+  cd: 'Candy Airdrop',
   regis: {
     place_email: 'Email',
     place_password: 'Password',
@@ -128,7 +131,14 @@ export const m = {
     ether: 'Ether/Day',
     adzoneStats: 'Adzone Stats',
     unavailable: 'unavailable',
-    noenough: 'You don\'t have enough balance, please deposit before making order.'
+    noenough: 'You don\'t have enough balance, please deposit before making order.',
+    ad: 'Ad position display and details',
+    po: 'Position',
+    fl: 'Flow',
+    of: 'Offer',
+    si: 'Size',
+    ae: 'Advantage',
+    vi: 'Daily visits'
   },
   adZoneSearch: {
     domain: 'Domain',
@@ -147,7 +157,10 @@ export const m = {
     rolling: 'Rolling',
     suggest: 'Suggest Price (Ether/Day)',
     action: 'Action',
-    noenough: 'You don\'t have enough balance, please deposit before making order.'
+    noenough: 'You don\'t have enough balance, please deposit before making order.',
+    acco: 'AdZone Number',
+    qujian: 'Competitive price range',
+    more: 'More'
   },
   airdrops: {
     title: 'Add Airdrop',
@@ -248,7 +261,13 @@ export const m = {
     isINcorrect: 'is incorrect, please select jpg or png.',
     exceeding: 'Exceeding file size limit',
     file: 'File ',
-    tooLarge: ' is too large, no more than 2M.'
+    tooLarge: ' is too large, no more than 2M.',
+    po: 'Position',
+    fl: 'Flow',
+    ae: 'Advantage',
+    pc: 'Pc and Mobile',
+    adv: 'Average daily visits',
+    int: 'Advertising space features introduced'
   },
   addMedia: {
     title: 'Title',
@@ -262,7 +281,8 @@ export const m = {
     less64: 'Title should be less than 64 characters',
     inputDomain: 'Please input domain',
     enterWeb: 'Please enter the website introduction',
-    less20: 'Introduce no less than 20 words'
+    less20: 'Introduce no less than 20 words',
+    meint: 'Media description'
   },
   adzoneTab: {
     size: 'Size',
@@ -330,7 +350,18 @@ export const m = {
     al: 'Adzone List',
     aa: 'Add Adzone',
     noAd: 'No Adzones in the media, click the button below to add new adzone.',
-    fail: 'Verification Failed!'
+    fail: 'Verification Failed!',
+    res: 'Media Resources',
+    int: 'Media Introduction',
+    dis: 'Resource display',
+    rep: 'Data Report',
+    sou: 'Media Resources',
+    num: 'Number',
+    pos: 'Position',
+    si: 'Size',
+    offer: 'Suggested offer',
+    dea: 'Details',
+    vw: 'View'
   },
   mt: {
     tit: 'Title',

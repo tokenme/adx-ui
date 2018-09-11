@@ -1,17 +1,36 @@
 <template>
   <div>
-    <Card v-if="media" :bordered="false" :dis-hover="true" :shadow="false">
-      <h2 slot="title">
-        {{ media.title }}
-      </h2>
-      <a slot="extra" :href="media.domain" target="_blank">
-        <Icon type="link"></Icon>
-        {{ media.domain }}
-      </a>
-      <p>{{ media.desc }}</p>
-    </Card>
-    <StatsChart ref="statsChart" :title="this.$t('m.mediatit')" :media-id="mediaId" :height="300"></StatsChart>
-    <AdzoneTable ref="adzoneTable" :media="media"></AdzoneTable>
+    <div class="left">
+      <div class="ziyuan">{{$t('m.med.res')}}</div>
+      <div class="name">{{media.title}}</div>
+      <Menu theme="dark" active-name="1" style="width:175px" @on-select="selectMenu">
+        <MenuItem name="1">
+            {{$t('m.med.int')}}
+        </MenuItem>
+        <MenuItem name="2">
+            {{$t('m.med.dis')}}
+        </MenuItem>
+        <MenuItem name="3">
+            {{$t('m.med.rep')}}
+        </MenuItem>
+      </Menu>
+    </div>
+    <div class="right">
+      <div class="introduce" v-if="active==1">
+        <a :href="media.domain" target="_blank"><img :src="media.imgurl" alt="" style="width:1006px;height:1146px"></a>
+      </div>
+      <div class="show" v-if="active==2" style="width:1200px;height:700px">
+        <Card :bordered="true" :dis-hover='true'>
+            <p slot="title">{{$t('m.med.sou')}}</p>
+            <p>
+              <Table border :loading="loading" :columns="columns" :data="adzones"></Table>
+            </p>
+        </Card>
+      </div>
+      <div class="table" v-if="active==3">
+        <StatsChart ref="statsChart" :title="this.$t('m.med.rep')" :media-id="mediaId" :height="300" style="width:1100px"></StatsChart>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +48,62 @@
       return {
         spinShow: false,
         mediaId: 0,
-        media: null
+        media: {},
+        active: 1,
+        loading: false,
+        adzones: [],
+        columns: [
+          {
+            title: this.$t('m.med.num'), 
+            key: 'id',
+            align: 'center',
+            width: 196
+          }, {
+            title: this.$t('m.med.pos'),
+            key: 'desc',
+            align: 'center',
+            width: 219
+          }, {
+            title: this.$t('m.med.si'),
+            key: 'chicun',
+            align: 'center',
+            width: 240,
+            render: (h, params) => {
+              const str = params.row.size.width + 'x' + params.row.size.height
+              return h('span', str)
+            }
+          }, {
+            title: this.$t('m.med.offer') + '(Ether/天)',
+            key: 'min_cpt',
+            align: 'center',
+            width: 255
+            
+          }, {
+            title: this.$t('m.med.dea'),
+            key: 'action',
+            align: 'center',
+            width: 207,
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'primary',
+                    size: 'small',
+                    icon: 'ios-eye'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: (ev) => {
+                      this.onAdzoneClick(params.row)
+                    }
+                  }
+                }, this.$t('m.med.vw'))
+              ])
+            }
+          }
+        ]
       }
     },
     computed: {
@@ -43,8 +117,10 @@
           return
         }
         this.spinShow = true
+        this.loading = true
         mediaAPI.info(this.token, this.mediaId).then(res => {
           this.spinShow = false
+          this.loading = false
           if (res && res.code) {
             if (res.code === 401) {
               this.$router.push({
@@ -59,11 +135,15 @@
             return
           }
           this.media = res
-          const breadcrumb = [
-            {name: 'Dashboard', path: '/'},
-            {name: 'Media: ' + this.media.title, path: '/media/' + this.mediaId}
-          ]
-          this.$store.dispatch(types.UPDATE_BREADCRUMB, breadcrumb)
+          this.adzones = res.adzones
+        })
+      },
+      selectMenu(name) {
+        this.active = name
+      },
+      onAdzoneClick(adzone) {
+        this.$router.push({
+          path: '/adzone/' + adzone.id
         })
       }
     },
@@ -76,3 +156,49 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+.left{
+  width: 175px;
+  height: 1146px;
+  background: #000000;
+  float: left;
+  .ivu-menu-dark{
+    background: #000000
+  }
+  .ivu-menu-item{
+    margin-top: 20px;
+    text-align: center
+  }
+  .ziyuan{
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 50px;
+    color: #ffffff
+  }
+  .name{
+    width: 145px;
+    height: 45px;
+    background: #ed5c5c;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 16px;
+    line-height: 45px;
+    border-radius: 5px;
+  }
+  
+}
+.right{
+  width: 1006px;
+  height: 1146px;
+  float: left;
+  margin-left: 20px;
+  .tit{
+    font-size: 20px !important;
+    color: #ed5c5c !important;
+    font-weight: 600
+  }
+}
+</style>
