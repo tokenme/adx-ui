@@ -33,6 +33,9 @@ export const m = {
   edt: '编辑',
   vy: '验证',
   ht: '管理后台',
+  candy: '空投糖果',
+  week: '此数据为周数据',
+  cd: '糖果空投',
   regis: {
     place_email: '邮箱',
     place_password: '密码',
@@ -128,7 +131,14 @@ export const m = {
     ether: '日消耗（Ether/天）',
     adzoneStats: '广告位状态',
     unavailable: '不可用的',
-    noenough: '你没有足够的余额，请在下单前存入.'
+    noenough: '你没有足够的余额，请在下单前存入.',
+    ad: '广告位展示及详情',
+    po: '位置',
+    fl: '流量',
+    of: '报价',
+    si: '尺寸',
+    ae: '优势',
+    vi: '日访问量'
   },
   adZoneSearch: {
     domain: '域名',
@@ -141,13 +151,16 @@ export const m = {
   adZoneTable: {
     title: '用户新订单',
     okText: '提交',
-    adZoneList: '广告位列表',
+    adZoneList: '媒体投放',
     media: '媒体',
     size: '规模',
     rolling: '轮播',
     suggest: '建议出价 （Ether/天）',
     action: '操作',
-    noenough: '你没有足够的余额，请在定单前存入.'
+    noenough: '你没有足够的余额，请在定单前存入.',
+    acco: '广告位数量',
+    qujian: '竞价区间',
+    more: '更多'
   },
   airdrops: {
     title: '添加空投',
@@ -248,7 +261,13 @@ export const m = {
     isINcorrect: '不正确，请选择JPG或PNG。',
     exceeding: '超过文件大小限制',
     file: '文件 ',
-    tooLarge: ' 太大了，不超过2M。'
+    tooLarge: ' 太大了，不超过2M。',
+    po: '位置',
+    fl: '流量',
+    ae: '优势',
+    pc: 'PC和移动',
+    adv: '平均日访问量',
+    int: '广告位特点介绍'
   },
   addMedia: {
     title: '标题',
@@ -262,7 +281,8 @@ export const m = {
     less64: 'Title不能超过64个字符',
     inputDomain: '请输入域名',
     enterWeb: '请输入网站介绍',
-    less20: '介绍不能少于20个字'
+    less20: '介绍不能少于20个字',
+    meint: '媒体介绍'
   },
   adzoneTab: {
     size: '图片尺寸',
@@ -330,7 +350,18 @@ export const m = {
     al: '广告位列表',
     aa: '新增广告位',
     noAd: '媒体中没有广告位，点击按钮新加一个.',
-    fail: '验证失败!'
+    fail: '验证失败!',
+    res: '媒体资源',
+    int: '媒体介绍',
+    dis: '资源位展示',
+    rep: '数据报表',
+    sou: '媒体全部资源位',
+    num: '序号',
+    pos: '位置',
+    si: '尺寸',
+    offer: '建议报价',
+    dea: '详情',
+    vw: '查看详情'
   },
   mt: {
     tit: '标题',

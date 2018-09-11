@@ -37,6 +37,15 @@
       :rules="{type: 'url', message: this.$t('m.addAdzone.invalidUrl'), trigger: 'blur'}">
       <Input type="text" v-model="addAdzoneForm.placeholder.url" :placeholder="this.$t('m.addAdzone.landing')"></Input>
     </FormItem>
+    <FormItem :label="this.$t('m.addAdzone.po')" prop="location">
+      <Input v-model="addAdzoneForm.location" type="text"  :placeholder="this.$t('m.addAdzone.pc')"></Input>
+    </FormItem>
+    <FormItem :label="this.$t('m.addAdzone.fl')" prop="traffic">
+      <Input v-model="addAdzoneForm.traffic" type="text" :placeholder="this.$t('m.addAdzone.ae')"></Input>
+    </FormItem>
+    <FormItem :label="this.$t('m.addAdzone.ae')" prop="advantage">
+      <Input v-model="addAdzoneForm.advantage" type="textarea" :placeholder="this.$t('m.addAdzone.int')"></Input>
+    </FormItem>
   </Form>
 </template>
 
@@ -52,6 +61,9 @@
           minCpt: 1,
           rolling: 1,
           desc: '',
+          advantage: '',
+          location: '',
+          traffic: '',
           placeholder: {
             url: '',
             img: '',
@@ -128,8 +140,11 @@
               settlement: 2,
               rolling: this.addAdzoneForm.rolling,
               desc: this.addAdzoneForm.desc,
-              placeholder_url: this.addAdzoneForm.placeholder.url,
-              placeholder_img: this.addAdzoneForm.placeholder.img
+              placeholder_url: this.addAdzoneForm.placeholder.url, //登录页面
+              placeholder_img: this.addAdzoneForm.placeholder.img, //图片
+              location: this.addAdzoneForm.location,
+              traffic: this.addAdzoneForm.traffic,
+              advantage: this.addAdzoneForm.advantage
             }
             adzoneAPI.add(this.token, payload).then(res => {
               if (res && res.code) {

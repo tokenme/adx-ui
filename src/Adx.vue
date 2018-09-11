@@ -8,11 +8,11 @@
                 {{ item.name }}
               </BreadcrumbItem>
           </Breadcrumb>
-          <Card>
+          <!-- <Card> -->
               <div style="min-height: 200px;">
                   <router-view></router-view>
               </div>
-          </Card>
+          <!-- </Card> -->
       </Content>
       <Footer class="layout-footer-center">2018 &copy; Tokenmama.IO</Footer>
     </Layout>

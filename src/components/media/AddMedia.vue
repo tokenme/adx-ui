@@ -11,8 +11,22 @@
         </Select>
       </Input>
     </FormItem>
-    <FormItem :label="this.$t('m.addMedia.desc')" prop="desc">
+    <!-- <FormItem :label="this.$t('m.addMedia.desc')" prop="desc">
       <Input v-model="addMediaForm.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :placeholder="this.$t('m.addMedia.mediaDesc')"></Input>
+    </FormItem> -->
+    <img :src="addMediaForm.placeholder.img_url" v-if="addMediaForm.placeholder && addMediaForm.placeholder.img_url" :style="imgStyle">
+    <FormItem :label="this.$t('m.addMedia.meint')">
+      <Upload 
+        ref="uploadModel"
+        action="/creative/upload" 
+        :format="['jpg','jpeg','png']" 
+        :max-size="2048"
+        :headers = "{'Authorization': 'Bearer ' + token}"
+        :on-format-error="handleFormatError"
+        :on-exceeded-size="handleMaxSize"
+        :on-success="handleSuccess">
+        <Button type="ghost" icon="ios-cloud-upload-outline">{{$t('m.addAdzone.uploadImg')}}</Button>
+      </Upload>
     </FormItem>
   </Form>
 </template>
@@ -39,7 +53,12 @@
           title: '',
           schema: 'http',
           domain: '',
-          desc: ''
+          desc: '',
+          placeholder: {
+            url: '',
+            img: '',
+            img_url: ''
+          }
         },
         addRule: {
           title: [
@@ -60,16 +79,45 @@
     computed: {
       token() {
         return this.$store.getters['token']
+      },
+      imgStyle() {
+        if (!this.size) {
+          return {marginLeft: '160px', width: '200px', height: '200px'}
+        }
+        if (this.size.width >= this.size.height) {
+          return { marginLeft: '160px', width: '200px', height: Math.floor(200 * this.size.height / this.size.width) + 'px' }
+        }
+        return { marginLeft: '160px', width: Math.floor(100 * this.size.width / this.size.height) + 'px', height: '100px' }
       }
     },
     methods: {
+      handleSuccess (res, file) {
+        this.addMediaForm.placeholder.img = res.name
+        this.addMediaForm.placeholder.img_url = res.url
+        this.$refs.uploadModel.clearFiles()
+        file.url = res.url
+        file.name = res.name
+      },
+      handleFormatError (file) {
+        this.$Notice.warning({
+          title: this.$t('m.addAdzone.fromatIncorrect'),
+          desc: this.$t('m.addAdzone.fileFormat') + file.name + this.$t('m.addAdzone.isINcorrect')
+        });
+      },
+      handleMaxSize (file) {
+        this.$Notice.warning({
+          title: this.$t('m.addAdzone.exceeding'),
+          desc: this.$t('m.addAdzone.file') + file.name + this.$t('m.addAdzone.tooLarge')
+        });
+      },
       submit(resolve, reject) {
         this.$refs.addMediaForm.validate((valid) => {
           if (valid) {
             const payload = {
               title: this.addMediaForm.title,
               domain: this.addMediaForm.schema + '://' + this.addMediaForm.domain,
-              desc: this.addMediaForm.desc
+              // desc: this.addMediaForm.desc,
+              placeholder_img: this.addMediaForm.placeholder.img
             }
             mediaAPI.add(this.token, payload).then(res => {
               if (res && res.code) {
