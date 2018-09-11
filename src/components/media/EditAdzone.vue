@@ -27,10 +27,19 @@
       </Upload>
     </FormItem>
     <FormItem 
-      :label="this.$t('m.edit.landing')" 
+      :label="this.$t('m.editAd.landing')" 
       prop="placeholder.url" 
-      :rules="{type: 'url', message: this.$t('m.edit.invalidUrl'), trigger: 'blur'}">
-      <Input type="text" v-model="editForm.placeholder.url" placeholder="this.$t('m.edit.landing')"></Input>
+      :rules="{type: 'url', message: this.$t('m.editAd.invalidUrl'), trigger: 'blur'}">
+      <Input type="text" v-model="editForm.placeholder.url" :placeholder="this.$t('m.editAd.landing')"></Input>
+    </FormItem>
+    <FormItem :label="this.$t('m.addAdzone.po')" prop="location">
+      <Input v-model="editForm.location" type="text"  :placeholder="this.$t('m.addAdzone.pc')"></Input>
+    </FormItem>
+    <FormItem :label="this.$t('m.addAdzone.fl')" prop="traffic">
+      <Input v-model="editForm.traffic" type="text" :placeholder="this.$t('m.addAdzone.adv')"></Input>
+    </FormItem>
+    <FormItem :label="this.$t('m.addAdzone.ae')" prop="advantage">
+      <Input v-model="editForm.advantage" type="textarea" :placeholder="this.$t('m.addAdzone.int')"></Input>
     </FormItem>
   </Form>
 </template>
@@ -45,6 +54,9 @@
           rolling: 1,
           url: '',
           desc: '',
+          advantage: '',
+          location: '',
+          traffic: '',
           size: {
             width: 0,
             height: 0
@@ -58,11 +70,11 @@
         },
         editRule: {
           url: [
-            { required: true, message: this.$t('m.edit.inputUrl'), trigger: 'blur' },
-            { type: 'url', message: this.$t('m.edit.invalidUrl'), trigger: 'blur' }
+            { required: true, message: this.$t('m.editAd.inputUrl'), trigger: 'blur' },
+            { type: 'url', message: this.$t('m.editAd.invalidUrl'), trigger: 'blur' }
           ],
           desc: [
-            { required: true, message: this.$t('m.edit.enterAdzone'), trigger: 'blur' }
+            { required: true, message: this.$t('m.editAd.enterAdzone'), trigger: 'blur' }
           ]
         }
       }
@@ -85,7 +97,10 @@
           minCpt: adzone.min_cpt,
           rolling: adzone.rolling,
           url: adzone.url,
-          desc: adzone.desc,
+          desc: adzone.intro,
+          advantage: adzone.advantage,
+          location: adzone.location,
+          traffic: adzone.traffic,
           size: adzone.size,
           placeholder: {
             url: adzone.placeholder ? adzone.placeholder.url : '',
@@ -126,7 +141,10 @@
               desc: this.editForm.desc,
               placeholder_url: this.editForm.placeholder.url,
               placeholder_img: this.editForm.placeholder.img,
-              online_status: this.editForm.onlineStatus
+              online_status: this.editForm.onlineStatus,
+              location: this.editForm.location,
+              traffic: this.editForm.traffic,
+              advantage: this.editForm.advantage
             }
             adzoneAPI.update(this.token, payload).then(res => {
               if (res && res.code) {

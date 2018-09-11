@@ -183,8 +183,6 @@ const actions = {
   },
   [types.GEOIP_LOCAL](state, value) {
     state.countryCode = value
-    // console.log(state.countryCode)
-    // console.log(333)
   },
   [types.REGISTER_REQUESTPHONE]({
     commit,

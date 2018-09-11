@@ -11,7 +11,7 @@
         <Option v-for="item in sizes" :value="item.id" :key="item.id">{{ item.width }}x{{ item.height }}</Option>
       </Select>
     </FormItem>
-    <Button style="margin-left:44px" type="primary" icon="ios-search" @click="onSearch">{{$t('m.adZoneSearch.search')}}</Button>
+    <Button style="margin-left:25px" type="primary" icon="ios-search" @click="onSearch">{{$t('m.adZoneSearch.search')}}</Button>
   </Form>
 </template>
 

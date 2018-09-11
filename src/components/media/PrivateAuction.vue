@@ -2,7 +2,7 @@
   <div>
     <Card v-if="adzone" :bordered="false" :dis-hover="true" :shadow="false">
       <h2 slot="title">
-        {{ adzone.media.title }}{{$t('m.prau.ad')}}} {{ adzone.id }}]
+        {{ adzone.media.title }}{{$t('m.prau.ad')}} {{ adzone.id }}
       </h2>
       <a slot="extra" :href="adzone.media.domain" target="_blank">
         <Icon type="link"></Icon>
