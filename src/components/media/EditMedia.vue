@@ -109,7 +109,6 @@
               placeholder_img: this.mediaFrom.placeholder.img,
               online_status: this.media.online_status
             }
-            console.log(payload)
             mediaAPI.update(this.token, payload).then(res => {
               if (res && res.code) {
                 reject(res)

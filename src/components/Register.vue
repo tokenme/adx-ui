@@ -136,7 +136,6 @@
         }
       }
       const validatePhone = (rule, value, callback) => {
-        console.log(value)
         if (value === '') {
           callback(new Error(this.$t('m.login.inPhone')))
         } else if (/^\d{1,10}$/.test(value)) {

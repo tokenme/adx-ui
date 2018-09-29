@@ -12,14 +12,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- <v-snackbar
-      :timeout="2000"
-      multi-line
-      v-model="showSnackbar"
-    >
-      {{ snackbar.message }}
-      <v-btn dark flat @click.native="showSnackbar=false">{{ $t('close') }}</v-btn>
-    </v-snackbar> -->
     <v-toolbar dark color="primary" style="background:#1976d2;color:#fff"  app fixed v-if="!hideToolbar">
       <v-toolbar-title>{{ toolbarTitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -45,7 +37,7 @@
       <router-view></router-view>
     </v-content>
     <v-footer color="transparent" v-if="!hideFooter">
-      <v-btn small block flat to="{name: 'home'}">tokenmama.io&copy;2017</v-btn>
+      <v-btn small block flat :to="{name: 'newairdrops'}">tokenmama.io&copy;2017</v-btn>
     </v-footer>
   </v-app>
 </template>

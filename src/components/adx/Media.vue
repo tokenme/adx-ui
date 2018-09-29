@@ -20,11 +20,11 @@
         <div v-if="media.imgurl === ''" style="width:100%;height:200px;text-align:center;line-height:200px;font-size:16px">暂无媒体介绍,去官网看看 <a :href="media.domain" target="_blank">{{media.domain}}</a>
         </div>
         <div v-else>
-          <a :href="media.domain" target="_blank"><img :src="media.imgurl" alt="" style="width:1006px;height:1146px"></a>
+          <a :href="media.domain" target="_blank"><img :src="media.imgurl" alt="" style="width:100%;height:1146px"></a>
         </div>
         
       </div>
-      <div class="show" v-if="active==2" style="width:1200px;height:700px">
+      <div class="show" v-if="active==2" style="width:100%;height:700px">
         <Card :bordered="true" :dis-hover='true'>
             <p slot="title">{{$t('m.med.sou')}}</p>
             <p>
@@ -33,7 +33,7 @@
         </Card>
       </div>
       <div class="table" v-if="active==3">
-        <StatsChart ref="statsChart" :title="this.$t('m.med.rep')" :media-id="mediaId" :height="300" style="width:1100px"></StatsChart>
+        <StatsChart ref="statsChart" :title="this.$t('m.med.rep')" :media-id="mediaId" :height="300" style="width:100%"></StatsChart>
       </div>
     </div>
   </div>
@@ -61,18 +61,18 @@
           {
             title: this.$t('m.med.num'), 
             key: 'id',
-            align: 'center',
-            width: 196
+            align: 'center'
+            // width: 196
           }, {
             title: this.$t('m.med.pos'),
             key: 'intro',
-            align: 'center',
-            width: 219
+            align: 'center'
+            // width: 219
           }, {
             title: this.$t('m.med.si'),
             key: 'chicun',
             align: 'center',
-            width: 240,
+            // width: 240,
             render: (h, params) => {
               const str = params.row.size.width + 'x' + params.row.size.height
               return h('span', str)
@@ -80,14 +80,14 @@
           }, {
             title: this.$t('m.med.offer') + '(Ether/天)',
             key: 'min_cpt',
-            align: 'center',
-            width: 255
+            align: 'center'
+            // width: 255
             
           }, {
             title: this.$t('m.med.dea'),
             key: 'action',
             align: 'center',
-            width: 207,
+            // width: 207,
             render: (h, params) => {
               return h('div', [
                 h('Button', {
@@ -198,10 +198,10 @@
   
 }
 .right{
-  width: 1006px;
+  width: 80%;
   height: 1146px;
   float: left;
-  margin-left: 20px;
+  margin-left: 5%;
   .tit{
     font-size: 20px !important;
     color: #ed5c5c !important;

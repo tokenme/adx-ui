@@ -381,11 +381,11 @@
       }
     },
     computed: {
-      airdrop() {
-        return this.$store.getters.getAirdropById(this.airdropId)
-      },
       user() {
         return this.$store.getters['userInfo']
+      },
+      airdrop() {
+        return this.$store.getters.getAirdropById(this.airdropId)
       },
       token() {
         return this.$store.getters['token']
@@ -477,10 +477,10 @@
           }
         }, err => {
           if (err.code === 401) {
-            this.$router.push({
-              name: 'login'
-            })
-            return
+            // this.$router.push({
+            //   name: 'login'
+            // })
+            // return
           }
           this.showErrorDialog({ title: this.$t('m.Airdrop.error.get_adzones_failed'), message: err.message })
         })
@@ -510,10 +510,10 @@
         }, err => {
           this.toggleLoading(false)
           if (err.code === 401) {
-            this.$router.push({
-              name: 'login'
-            })
-            return
+            // this.$router.push({
+            //   name: 'login'
+            // })
+            // return
           }
           this.showErrorDialog({ title: this.$t('m.Airdrop.failed_title'), message: err.message })
           if (cb) {
