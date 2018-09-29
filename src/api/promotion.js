@@ -1,57 +1,8 @@
 import axios from 'axios'
 
 export default {
-  sizes() {
-    return axios.get('/adzone/sizes').then((response) => {
-      return response.data
-    }).catch((err) => {
-      if (err.response) {
-        if (err.response.data) {
-          return err.response.data.code ? err.response.data : {
-            code: 1,
-            message: err.response.data
-          }
-        }
-        return {
-          code: err.response.status,
-          message: 'unauthorized'
-        }
-      }
-      return {
-        code: 1,
-        message: err
-      }
-    })
-  },
   add(token, payload) {
-    return axios.post('/adzone/add', payload, {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    }).then((response) => {
-      return response.data
-    }).catch((err) => {
-      if (err.response) {
-        if (err.response.data) {
-          return err.response.data.code ? err.response.data : {
-            code: 1,
-            message: err.response.data
-          }
-        }
-        return {
-          code: err.response.status,
-          message: 'unauthorized'
-        }
-      }
-      return {
-        code: 1,
-        message: err
-      }
-    })
-  },
-  info(token, id) {
-    return axios.get('/adzone/info', {
-      params: {id: id},
+    return axios.post('/promotion/add', payload, {
       headers: {
         'Authorization': 'Bearer ' + token
       }
@@ -77,7 +28,7 @@ export default {
     })
   },
   list(token, payload) {
-    return axios.get('/adzone/list', {
+    return axios.get('/promotion/list', {
       params: payload,
       headers: {
         'Authorization': 'Bearer ' + token
@@ -103,34 +54,8 @@ export default {
       }
     })
   },
-  airdropadd(token, payload) {
-    return axios.post('/airdropadzone/add', payload, {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    }).then((response) => {
-      return response.data
-    }).catch((err) => {
-      if (err.response) {
-        if (err.response.data) {
-          return err.response.data.code ? err.response.data : {
-            code: 1,
-            message: err.response.data
-          }
-        }
-        return {
-          code: err.response.status,
-          message: 'unauthorized'
-        }
-      }
-      return {
-        code: 1,
-        message: err
-      }
-    })
-  },
-  airdroplist(token, payload) {
-    return axios.get('/airdropadzone/list', {
+  get(token, payload) {
+    return axios.get('/promotion/get', {
       params: payload,
       headers: {
         'Authorization': 'Bearer ' + token
@@ -156,13 +81,8 @@ export default {
       }
     })
   },
-  search(token, payload) {
-    return axios.get('/adzone/MediaList', {
-      params: payload,
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    }).then((response) => {
+  show(key) {
+    return axios.get('/promotion/show/' + key).then((response) => {
       return response.data
     }).catch((err) => {
       if (err.response) {
@@ -183,8 +103,53 @@ export default {
       }
     })
   },
-  update(token, payload) {
-    return axios.post('/adzone/update', payload, {
+  wallet() {
+    return axios.get('/promotion/wallet').then((response) => {
+      return response.data
+    }).catch((err) => {
+      if (err.response) {
+        if (err.response.data) {
+          return err.response.data.code ? err.response.data : {
+            code: 1,
+            message: err.response.data
+          }
+        }
+        return {
+          code: err.response.status,
+          message: 'unauthorized'
+        }
+      }
+      return {
+        code: 1,
+        message: err
+      }
+    })
+  },
+  submit(payload) {
+    return axios.post('/promotion/submit', payload).then((response) => {
+      return response.data
+    }).catch((err) => {
+      if (err.response) {
+        if (err.response.data) {
+          return err.response.data.code ? err.response.data : {
+            code: 1,
+            message: err.response.data
+          }
+        }
+        return {
+          code: err.response.status,
+          message: 'unauthorized'
+        }
+      }
+      return {
+        code: 1,
+        message: err
+      }
+    })
+  },
+  stats(token, payload) {
+    return axios.get('/promotion/stats', {
+      params: payload,
       headers: {
         'Authorization': 'Bearer ' + token
       }

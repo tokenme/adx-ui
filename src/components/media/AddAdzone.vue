@@ -111,11 +111,22 @@
     },
     methods: {
       handleSuccess (res, file) {
+        if (res.code && res.code === 400) {
+          this.$Notice.warning({
+            title: this.$t('m.fail'),
+            desc: this.$t('m.tim')
+          });
+          return
+        }
         this.addAdzoneForm.placeholder.img = res.name
         this.addAdzoneForm.placeholder.img_url = res.url
         this.$refs.uploadModel.clearFiles()
         file.url = res.url
         file.name = res.name
+        this.$Notice.warning({
+          title: '成功',
+          desc: '上传图片成功'
+        });
       },
       handleFormatError (file) {
         this.$Notice.warning({

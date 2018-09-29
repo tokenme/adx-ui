@@ -6,7 +6,7 @@
           <img src="https://tmm-adx.tianxi100.com/img/logo/red-300.png?v=20180427" class="layout-logo"/>
         </Col>
         <Col>
-          <MenuItem :name="item.route" v-for="item of menuItems" :key="item.route">
+          <MenuItem :name="item.route" v-for="item of menuItems" :key="item.route" v-if="logined">
             <Icon :type="item.icon"></Icon>
             {{ item.name }}
           </MenuItem>
@@ -14,6 +14,10 @@
             <MenuItem name="admin" v-if="user.is_admin===1">
               <Icon type="ios-people"></Icon>
               {{$t('m.ht')}}
+            </MenuItem>
+            <MenuItem v-if="user.is_advertiser === 1">
+              <Icon type="android-plane"></Icon>
+              <a href="./airdrop.html" style="color:rgba(255,255,255,.7)">{{$t('m.airdrop')}}</a>
             </MenuItem>
             <MenuItem name="account">
               <Icon type="ios-person"></Icon>
@@ -48,8 +52,8 @@
         lang: localStorage.lang ? localStorage.lang : 'en-US',
         menuItems: [
           {icon: 'ios-speedometer-outline', name: this.$t('m.dashBoard'), route: 'dashboard', path: '/'},
-          {icon: 'ios-cart', name: this.$t('m.auctions'), route: 'auctions', path: '/private-auctions'},
-          {icon: 'android-plane', name: this.$t('m.airdrop'), route: 'airdrops', path: '/airdrops'}
+          {icon: 'ios-cart', name: this.$t('m.auctions'), route: 'auctions', path: '/private-auctions'}
+          // {icon: 'android-plane', name: this.$t('m.airdrop'), route: 'airdrops', path: '/airdrops'}
         ]
       }
     },
@@ -90,6 +94,10 @@
           this.$router.push({
             path: '/admin'
           })
+          return
+        }
+        if (name === 'airdrops') {
+          location.href = 'airdrop.html'
           return
         }
         for (const item of this.menuItems) {

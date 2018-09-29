@@ -36,6 +36,8 @@ export const m = {
   candy: 'Airdrop Candy',
   week: 'This data is weekly data',
   cd: 'Candy Airdrop',
+  fail: 'Fail',
+  tim: 'Upload timeout, please upload again.',
   regis: {
     place_email: 'Email',
     place_password: 'Password',
@@ -421,5 +423,225 @@ export const m = {
   },
   patx: {
     re: 'Reject Reason'
+  },
+  newAirdrops: {
+    failed_title: 'GET AIRDROPS FAILED',
+    dateRange: 'From:{from} To:{to}',
+    gas_balance_label: 'BALANCE',
+    apply_airdrop_title: 'APPLY PUBLISH AIRDROP FEATURE',
+    apply_airdrop_message: 'To publish airdrop task need to be verified, please click the "APPLY" button, we will contact you with your registed telephone number or bind telegram account.',
+    apply_publisher_success_title: 'SUCCESS',
+    apply_publisher_success_message: 'We have already got your application, please be patient for verification.',
+    apply_btn: 'APPLY',
+    close: 'CLOSE',
+    airdrop: {
+      status: {
+        stop: 'STOPPED',
+        start: 'RUNNING'
+      }
+    },
+    error: {
+      apply_publisher_failed: 'APPLY AIRDROP PUBLISHER FAILED'
+    }
+  },
+  loadmore: {
+    releaseText: 'release to update',
+    loadingText: 'loadingText...',
+    topPullText: 'pull to refresh',
+    buttomPullText: 'pull to refresh'
+  },
+  newAddAirdrop: {
+    sub: 'Submit',
+    failed_title: 'ADD AIRDROP FAILED',
+    add_airdrop_title: 'ADD AIRDROP',
+    airdrop_name_label: 'AIRDROP NAME',
+    token_address_label: 'ERC20 Token Address',
+    gas_price_label: 'GAS PRICE',
+    suggest_gas_price_hint: 'Currently suggest gas price is {price}Gwei',
+    gas_limit_label: 'GAS LIMIT',
+    give_out_label: 'GIVE OUT',
+    symbol_per_user: '{symbol}/user',
+    bonus_label: 'PROMOTION BONUS',
+    bonus_hint: 'give some percent of each give out to the user who promoted the airdrop',
+    max_submissions_label: 'MAX SUBMISSIONS',
+    reply_msg_label: 'BOT REPLY MESSAGE',
+    symbol_per_tx: '{symbol}/tx',
+    telegram_group_label: 'TELEGRAM GROUP TITLE',
+    require_email_label: 'REQUIRE EMAIL',
+    start_date_label: 'START DATE',
+    end_date_label: 'END DATE',
+    token_address: 'ADDRESS',
+    token_name: 'NAME',
+    token_symbol: 'SYMBOL',
+    token_decimals: 'DECIMALS',
+    error: {
+      get_token_failed: 'GET TOKEN FAILED',
+      airdrop_name_required: 'airdrop name is required',
+      airdrop_name_less_than_20: 'airdrop name must be less than 20 characters',
+      airdrop_name_more_than_5: 'airdrop name must be more than 5 characters',
+      token_required: 'please input valid ERC20 token address',
+      min_gas_price: 'min gas price >= 3Gwei',
+      max_gas_price: 'max gas price <= 500Gwei',
+      min_gas_limit: 'min gas limit >= 150000',
+      number_required: 'must > 0',
+      bonus_required: 'must between 0~100',
+      telegram_group_required: 'telegram group is required',
+      start_date_required: 'start date is required',
+      end_date_required: 'end date is required'
+    }
+  },
+  Airdrop: {
+    failed_title: 'GET AIRDROP FAILED',
+    token_address: 'CONTRACT ADDRESS',
+    token_name: 'NAME',
+    token_symbol: 'SYMBOL',
+    token_decimals: 'DECIMALS',
+    wallet_address: 'DEPOSIT WALLET, click to copy',
+    gas_balance: 'GAS BALANCE',
+    token_balance: 'TOKEN BALANCE',
+    bonus: 'BONUS: {bonus}%/tx',
+    dateRange: 'From:{from} To:{to}',
+    promote_btn: 'PROMOTE',
+    withdraw: 'WITHDRAW',
+    airdrop: {
+      status: {
+        stop: '暫停',
+        start: '運行中'
+      }
+    },
+    transfer_setting: 'TRANSFER SETTINGS',
+    gas_price: 'GAS PRICE, click to edit',
+    gas_limit: 'GAS LIMIT, click to edit',
+    gas_price_label: 'GAS PRICE',
+    suggest_gas_price_hint: 'Currently suggest gas price is {price}Gwei',
+    max_submissions_label: 'MAX SUBMISSIONS',
+    reply_msg_label: 'BOT REPLY MESSAGE',
+    gas_limit_label: 'GAS LIMIT',
+    drop_date_label: 'TRANSFER DATE',
+    drop_date_sub_label: 'TRANSFER DATE, click to edit',
+    give_out_label: 'GIVE OUT',
+    symbol_per_user: '{symbol}/user',
+    promotion_title: 'NEW PROMOTION',
+    select_channel: 'SELECT CHANNEL',
+    select_adzone: 'SELECT ADZONE',
+    promotion_response_title: 'SUCCESSFULLY CREATED PROMOTION ACTIVITY',
+    promotion_response_msg: 'Click to copy the promotion link',
+    new_adzone_label: 'NEW ADZONE NAME',
+    add_telegram_bot_alert: 'Please add @{bot} bot in @{group}',
+    require_email_label: 'REQUIRE EMAIL',
+    error: {
+      get_adzones_failed: 'GET ADZONES FAILED',
+      update_airdrop_failed: 'UPDATE AIRDROP FAILED',
+      create_promotion_failed: 'CREATE PROMOTION FAILED',
+      need_channel: 'Must select a channel',
+      need_adzone: 'Must select a adzone',
+      min_gas_price: 'min gas price >= 3Gwei',
+      max_gas_price: 'max gas price <= 500Gwei',
+      min_gas_limit: 'min gas limit >= 150000',
+      number_required: 'must > 0',
+      withdraw_failed: 'Withdraw Failed',
+      withdraw_seperatly: 'Please transfer token or ether seperatly',
+      wallet_required: 'Wallet address is required',
+      wallet_invalid: 'Wallet address is invalid',
+      password_required: '请填写密码'
+    },
+    start_date_label: 'START DATE',
+    end_date_label: 'END DATE',
+    stats: {
+      header: {
+        record_on: 'Date',
+        pv: 'PV',
+        submissions: 'Submissions',
+        transactions: 'Transactions',
+        give_out: 'GiveOut',
+        bonus: 'Bonus(Gwei)',
+        commission_fee: 'CommissionFee(Gwei)'
+      }
+    },
+    withdraw_form: {
+      wallet_label: 'Wallet Address',
+      token_amount_label: 'Token Amount',
+      eth_amount_label: 'ETH Amount',
+      gas_price_label: 'Gas Price',
+      password: 'Password'
+    },
+    withdraw_tx_title: 'Withdraw Transaction',
+    withdraw_tx_msg: 'Click to copy withdraw transaction tx address'
+  },
+  stats: {
+    start_date_label: 'START DATE',
+    end_date_label: 'END DATE',
+    airdrop_export: 'Export Submissions',
+    stats: {
+      header: {
+        record_on: 'Date',
+        pv: 'PV',
+        submissions: 'Submissions',
+        transactions: 'Transactions',
+        give_out: 'GiveOut',
+        bonus: 'Bonus',
+        commission_fee: 'CommissionFee(Gwei)'
+      }
+    }
+  },
+  token: {
+    start_date_label: 'START DATE',
+    end_date_label: 'END DATE',
+    price_usd_label: 'Price',
+    marketcap_label: 'Market Cap',
+    volume_usd_label: 'Volume',
+    available_supply_label: 'Circulating Supply',
+    total_supply_label: 'Total Supply',
+    chart: {
+      marketcap: 'Market Cap',
+      price_usd: 'Price (USD)',
+      volume_usd: '24 Vol'
+    },
+    error: {
+      get_token_failed: 'GET TOKEN FAILED'
+    }
+  },
+  promo: {
+    telegram: 'Telegram',
+    biyong: 'Biyong',
+    input_email_title: 'Input your email Address',
+    email_label: 'Email Address',
+    input_wallet_title: 'Input your {symbol} wallet Address',
+    input_wallet_subtitle: 'please double check, make sure your wallet address is correct. If any error results in failure, please bear the responsibility!',
+    download_subtitle: '{symbol} is Ethereum compitable TOKEN, Download {wallet} client and register a new wallet address.',
+    create_new_wallet: 'Doesn\'t have? aquire one',
+    private_key_txt: 'PrivateKey: {key}, keep it safe&secret!',
+    copy_code_title: 'Copy the verification code',
+    copy_code_subtitle: 'click to copy, the code will be invalid in 2 hours',
+    join_telegram_group_title: 'Join telegram or Biyong group',
+    join_telegram_group_subtitle: 'You may need VPN in some country for Telegram',
+    verify_in_telegram_group_title: 'Verify in Telegram or Biyong group',
+    verify_in_telegram_group_subtitle: 'Paste your verification code in the telegram or Biyong group',
+    wait_for_transaction_title: 'Wait for token transfer complete',
+    wait_for_transaction_subtitle: 'After completing the verification, we\'ll automatically transfer the {project_name} to your {wallet} wallet',
+    wait_for_transaction_subtitle2: 'After completing the verification, we will transfer the candy to the user\'s {wallet} wallet which is successfully participated and registered.',
+    wallet_label: '{wallet} ADDRESS',
+    not_available: 'PROMOTION is TEMPERAY UNVALIABLE',
+    finished: 'PROMOTION is FINISHED',
+    not_start: 'PROMOTION is NOT START yet',
+    stopped: 'PROMOTION is STOPPED',
+    check_more_message: 'to earn more different tokens',
+    check_more_title: 'Earn more different tokens',
+    promote_btn: 'Share to earn Extra Tokens',
+    promote_btn_with_amount: 'Share to earn {amount} {name}',
+    promo_link_msg: 'Click to copy the promotion link',
+    promo_link_alert: 'Please submit your wallet address before generate promotion link',
+    download_client: 'Download {client} Client',
+    error: {
+      invalid_wallet: 'INVALID WALLET ADDRESS'
+    }
+  },
+  navtitle: {
+    air: 'Airdrop',
+    airdrops: 'Airdrops',
+    add_airdrop: 'Add Airdrop',
+    airdrop: 'Airdrop Details',
+    token: 'Token Details',
+    apply: 'Please click the right upper corner to apply '
   }
 }

@@ -36,6 +36,8 @@ export const m = {
   candy: '空投糖果',
   week: '此数据为周数据',
   cd: '糖果空投',
+  fail: '失败',
+  tim: '上传超时，请重新上传',
   regis: {
     place_email: '邮箱',
     place_password: '密码',
@@ -421,5 +423,225 @@ export const m = {
   },
   patx: {
     re: '拒绝原因'
+  },
+  newAirdrops: {
+    failed_title: '获取空投任务失败',
+    dateRange: '{from} 至 {to}',
+    gas_balance_label: '撒币余额',
+    apply_airdrop_title: '申请发布空投功能',
+    apply_airdrop_message: '申请发布空投功能需要审核，请点击“申请”按钮，我们将通过您注册的电话号码或者绑定的Telegram账号联系您。',
+    apply_publisher_success_title: '成功',
+    apply_publisher_success_message: '我们已经收到您的申请，请耐心等待审核。',
+    apply_btn: '申请',
+    close: '关闭',
+    airdrop: {
+      status: {
+        stop: '暂停',
+        start: '运行中'
+      }
+    },
+    error: {
+      apply_publisher_failed: '申请失败'
+    }
+  },
+  loadmore: {
+    releaseText: '释放更新',
+    loadingText: '加载中...',
+    topPullText: '下拉刷新',
+    buttomPullText: '上拉刷新'
+  },
+  newAddAirdrop: {
+    sub: '提交',
+    failed_title: '创建空投任务失败',
+    add_airdrop_title: '创建空投任务',
+    airdrop_name_label: '空投任务名',
+    token_address_label: 'ERC20 代币地址',
+    gas_price_label: 'GAS 出价',
+    suggest_gas_price_hint: '当前 Gas 建议出价为 {price}Gwei',
+    gas_limit_label: 'GAS LIMIT',
+    telegram_group_label: '电报群组名',
+    require_email_label: '需要电子邮件',
+    give_out_label: '撒币数',
+    symbol_per_user: '{symbol}/用户',
+    bonus_label: '推广奖励',
+    bonus_hint: '根据每币交易，奖励一定比例的代币给推广人',
+    max_submissions_label: '最多提交人数',
+    reply_msg_label: '电报机器人回复',
+    symbol_per_tx: '{symbol}/tx',
+    start_date_label: '开始时间',
+    end_date_label: '结束时间',
+    token_address: '代币地址',
+    token_name: '代币名',
+    token_symbol: '代币符号',
+    token_decimals: 'DECIMALS',
+    error: {
+      get_token_failed: '获取代币信息失败',
+      airdrop_name_required: '请填写空投任务',
+      airdrop_name_less_than_20: '空投任务必须少于20个字符',
+      airdrop_name_more_than_5: '空投任务必须多于5个字符',
+      token_required: '请输入合法的 ERC20 代币地址',
+      min_gas_price: '最小 Gas 出价 3Gwei',
+      max_gas_price: '最大 Gas 出价 500Gwei',
+      min_gas_limit: '最小 Gas Limit >= 150000',
+      number_required: '必须大于0',
+      bonus_required: '必须在0～100之间',
+      telegram_group_required: '请填写电报群组名',
+      start_date_required: '请设置开始时间',
+      end_date_required: '清设置结束时间'
+    }
+  },
+  Airdrop: {
+    failed_title: '获取空投任务失败',
+    token_address: '代币地址',
+    token_name: '代币名',
+    token_symbol: '代币符号',
+    token_decimals: 'DECIMALS',
+    wallet_address: '预算充值地址, 点击复制',
+    gas_balance: 'GAS 余额',
+    token_balance: '代币余额',
+    bonus: '佣金: {bonus}%/tx',
+    dateRange: '{from} 至 {to}',
+    promote_btn: '推广',
+    withdraw: '提取余额',
+    airdrop: {
+      status: {
+        stop: '暫停',
+        start: '運行中'
+      }
+    },
+    transfer_setting: '转账设置',
+    gas_price: 'GAS 出价, 点击修改',
+    gas_limit: 'GAS LIMIT, 点击修改',
+    gas_price_label: 'GAS 出价',
+    suggest_gas_price_hint: '当前 Gas 建议出价为 {price}Gwei',
+    gas_limit_label: 'GAS LIMIT',
+    give_out_label: '撒币数',
+    drop_date_label: '打币时间',
+    drop_date_sub_label: '打币时间, 点击修改',
+    max_submissions_label: '最多提交人数',
+    reply_msg_label: '电报机器人回复',
+    symbol_per_user: '{symbol}/用户',
+    promotion_title: '新建推广计划',
+    select_channel: '选择渠道',
+    select_adzone: '选择资源位',
+    promotion_response_title: '成功创建推广计划',
+    promotion_response_msg: '点击复制推广链接',
+    new_adzone_label: '新资源位名',
+    add_telegram_bot_alert: '请添加 @{bot} 机器人到群组 @{group}',
+    require_email_label: '需要电子邮件',
+    error: {
+      get_adzones_failed: '获取资源位失败',
+      update_airdrop_failed: '更新失败',
+      create_promotion_failed: '创建推广计划失败',
+      need_channel: '请选择渠道',
+      need_adzone: '请选择资源位',
+      min_gas_price: '最小 Gas 出价 3Gwei',
+      max_gas_price: '最大 Gas 出价 500Gwei',
+      min_gas_limit: '最小 Gas Limit >= 150000',
+      number_required: '必须大于0',
+      withdraw_seperatly: '请分开转账代币和ETH',
+      wallet_required: '请填写钱包地址',
+      wallet_invalid: '钱包地址不正确',
+      password_required: '请填写密码'
+    },
+    start_date_label: '开始时间',
+    end_date_label: '结束时间',
+    stats: {
+      header: {
+        record_on: '日期',
+        pv: '访问量',
+        submissions: '参与人数',
+        transactions: '转账数',
+        give_out: '送出代币',
+        bonus: '推广奖励(Gwei)',
+        commission_fee: '平台佣金(Gwei)'
+      }
+    },
+    withdraw_form: {
+      wallet_label: '钱包地址',
+      token_amount_label: '代币数量',
+      eth_amount_label: 'ETH数量',
+      gas_price_label: 'Gas出价',
+      password: '密码',
+      withdraw_failed: '提取余额失败'
+    },
+    withdraw_tx_title: '退款交易地址',
+    withdraw_tx_msg: '点击复制交易回执地址'
+  },
+  stats: {
+    start_date_label: '开始时间',
+    end_date_label: '结束时间',
+    airdrop_export: '导出订阅用户',
+    stats: {
+      header: {
+        record_on: '日期',
+        pv: '访问量',
+        submissions: '参与人数',
+        transactions: '转账数',
+        give_out: '送出代币',
+        bonus: '推广奖励',
+        commission_fee: '平台佣金(Gwei)'
+      }
+    }
+  },
+  token: {
+    start_date_label: '开始时间',
+    end_date_label: '结束时间',
+    price_usd_label: '价格',
+    marketcap_label: '市值',
+    volume_usd_label: '交易量',
+    available_supply_label: '流通供给量',
+    total_supply_label: '总供给量',
+    chart: {
+      marketcap: '市值',
+      price_usd: '价格(USD)',
+      volume_usd: '交易量(24h)'
+    },
+    error: {
+      get_token_failed: '获取代币信息失败'
+    }
+  },
+  promo: {
+    telegram: '电报',
+    biyong: '币用',
+    input_email_title: '输入您的电子邮箱地址',
+    email_label: '电子邮箱地址',
+    input_wallet_title: '输入您的 {wallet} 钱包地址',
+    input_wallet_subtitle: '请仔细检查您的钱包地址并确认是正确的，若有错误导致发放失败，请自行承担责任！',
+    download_subtitle: '{symbol} 拥有自己可拓展性开源独立公链技术，需单独下载 {wallet} 钱包客户端后生成钱包地址。',
+    create_new_wallet: '还没有钱包？马上获取一个',
+    private_key_txt: '私钥: {key}，请妥善保密保存',
+    copy_code_title: '请复制验证码',
+    copy_code_subtitle: '点击复制，验证码将在2小时后过期',
+    join_telegram_group_title: '加入电报或币用群组',
+    join_telegram_group_subtitle: '在部分国家可能需要 VPN 才能访问电报群，币用不需要 VPN',
+    verify_in_telegram_group_title: '在电报或币用群组内验证',
+    verify_in_telegram_group_subtitle: '将您的验证码粘贴在电报或币用群组内',
+    wait_for_transaction_title: '等待打币',
+    wait_for_transaction_subtitle: '完成验证后，我们会自动将{project_name}转移到您的 {wallet} 钱包地址',
+    wait_for_transaction_subtitle2: '完成验证后，我们将统一将糖果转入成功参与并登记的用户 {wallet} 钱包地址',
+    wallet_label: '{wallet} 钱包地址',
+    not_available: '该活动暂时停止了',
+    finished: '活动结束了',
+    not_start: '活动尚未开始',
+    stopped: '活动结束了',
+    check_more_message: '赚取更多其它代币',
+    check_more_title: '赚取更多其它代币',
+    promote_btn: '点击分享赚取更多代币',
+    promote_btn_with_amount: '点击分享赚取额外 {amount} {name}',
+    promo_link_msg: '点击复制推广链接',
+    promo_link_alert: '请先提交钱包地址再获取推广链接',
+    download_client: '下载 {client} 客戶端',
+    error: {
+      invalid_wallet: '钱包地址不正确'
+    }
+  },
+  navtitle: {
+    air: '空投',
+    airdrops: '空投任务',
+    add_airdrop: '创建空投任务',
+    airdrop: '空投任务详情',
+    token: '代币详情',
+    apply: '请点击右上角申请发布权限'
   }
 }

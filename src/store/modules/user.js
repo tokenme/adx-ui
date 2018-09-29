@@ -24,6 +24,7 @@ const getters = {
   isPublisher: state => state.user !== null && state.user.is_publisher > 0,
   isAdmin: state => state.user !== null && state.user.is_admin > 0,
   isAdvertiser: state => state.user !== null && state.user.is_advertiser > 0,
+  isAirdropPublisher: state => state.user !== null && state.user.is_airdrop_publisher,
   countryCode: state => {
     if (state.countryCode > 0) {
       return state.countryCode
