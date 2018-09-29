@@ -23,13 +23,16 @@ module.exports = (options = {}) => ({
     //vendor: './src/vendor',
     media: './src/media.js',
     adx: './src/adx.js',
-    tmm: './src/tmm.js'
+    tmm: './src/tmm.js',
+    airdrop: './src/airdrop.js',
+    promo: './src/promo.js'
   },
   externals: {
     'axios': 'axios',
     'vue': 'Vue',
     'vuex': 'Vuex',
     'iview': 'iview',
+    'vuetify': 'Vuetify',
     'vue-router': 'VueRouter',
     'vue-i18n': 'VueI18n',
     'vue-clipboard2': 'VueClipboard',
@@ -145,6 +148,16 @@ module.exports = (options = {}) => ({
       template: 'src/media.html',
       filename: 'media.html',
       chunks: [ 'media']
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/airdrop.html',
+      filename: 'airdrop.html',
+      chunks: ['airdrop']
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/promo.html',
+      filename: 'promo.html',
+      chunks: ['promo']
     }),
     new webpack.LoaderOptionsPlugin({
        minimize: true,

@@ -6,21 +6,25 @@
         <div>
           <AdzoneTable ref="adzoneTable" ></AdzoneTable>
         </div>
-        <!-- <div style="margin-top:15px;height:275px;background:#fff">
+        <div style="margin-top:15px;height:275px;background:#fff">
           <Card :dis-hover='true'>
             <p slot="title">{{$t('m.candy')}}</p>
             <p style="width:823px;height:182px">
               <Carousel  :v-model="0" loop>
                 <CarouselItem>
+                  <!-- <a @click="goto"> -->
                     <img style="width:823px" src="https://static.tianxi100.com/tmm/adx/bt.jpg" alt="">
+                  <!-- </a> -->
                 </CarouselItem>
                 <CarouselItem>
+                  <!-- <a @click="goto"> -->
                     <img style="width:823px" src="https://static.tianxi100.com/tmm/adx/us.jpg" alt="">
+                  <!-- </a> -->
                 </CarouselItem>
               </Carousel>
             </p>
           </Card>
-        </div> -->
+        </div>
       </div>
       <div style="width:330px;float:right">
         <slider-bar></slider-bar>
@@ -40,6 +44,11 @@
       'StatsChart': StatsChart,
       'SliderBar': SliderBar
     },
+    // methods: {
+    //   goto() {
+    //     this.$router.push({path: '/newairdrops'})
+    //   }
+    // },
     mounted() {
       this.$store.dispatch(types.UPDATE_CURRENT_ROUTE, 'dashboard')
     }

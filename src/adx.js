@@ -17,6 +17,7 @@ import Media from './components/adx/Media.vue'
 import Adzone from './components/adx/Adzone.vue'
 import Account from './components/adx/Account.vue'
 import Airdrops from './components/adx/Airdrops.vue'
+
 import store from './store'
 import VueI18n from 'vue-i18n'
 import * as types from './store/mutation-types'
@@ -45,21 +46,24 @@ const router = new VueRouter({
       redirect: route.query.redirect
     }),
     meta: {
-      title: 'login'
+      title: 'login',
+      navshow: true
     }
   }, {
     name: 'register',
     path: '/register',
     component: Register,
     meta: {
-      title: 'register'
+      title: 'register',
+      navshow: true
     }
   }, {
     name: 'reset-passwd',
     path: '/reset-passwd/:code',
     component: ResetPassword,
     meta: {
-      title: 'reset-passwd'
+      title: 'reset-passwd',
+      navshow: true
     }
   }, {
     name: 'dashboard',
@@ -67,7 +71,8 @@ const router = new VueRouter({
     component: Dashboard,
     meta: {
       title: 'dashboard',
-      auth: true
+      auth: true,
+      navshow: true
     }
   }, {
     name: 'account',
@@ -75,7 +80,8 @@ const router = new VueRouter({
     component: Account,
     meta: {
       title: 'account',
-      auth: true
+      auth: true,
+      navshow: true
     }
   }, {
     name: 'media',
@@ -83,7 +89,8 @@ const router = new VueRouter({
     component: Media,
     meta: {
       title: 'media',
-      auth: true
+      auth: true,
+      navshow: true
     }
   }, {
     name: 'adzone',
@@ -91,7 +98,8 @@ const router = new VueRouter({
     component: Adzone,
     meta: {
       title: 'media',
-      auth: true
+      auth: true,
+      navshow: true
     }
   }, {
     name: 'auctions',
@@ -104,7 +112,8 @@ const router = new VueRouter({
     }),
     meta: {
       title: 'auctions',
-      auth: true
+      auth: true,
+      navshow: true
     }
   }, {
     name: 'auction-stats',
@@ -118,7 +127,8 @@ const router = new VueRouter({
     }),
     meta: {
       title: 'auction-stats',
-      auth: true
+      auth: true,
+      navshow: true
     }
   }, {
     name: 'airdrops',
@@ -126,9 +136,11 @@ const router = new VueRouter({
     component: Airdrops,
     meta: {
       title: 'airdrops',
-      auth: true
+      auth: true,
+      navshow: true
     }
-  }],
+  }
+  ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
