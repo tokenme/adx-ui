@@ -1,5 +1,5 @@
 <template>
-  <Form slot="header" ref="filterForm" :model="filter" inline>
+  <Form slot="header" ref="filterForm" :model="filter" inline style="display:flex;justify-content:space-between">
     <FormItem :label="this.$t('m.adZoneSearch.domain')" prop="domain" :label-width="37" v-if='showDomain'>
       <Input type="text" v-model="filter.domain" :placeholder="this.$t('m.adZoneSearch.webDomain')"></Input>
     </FormItem>
@@ -11,7 +11,7 @@
         <Option v-for="item in sizes" :value="item.id" :key="item.id">{{ item.width }}x{{ item.height }}</Option>
       </Select>
     </FormItem>
-    <Button style="margin-left:25px" type="primary" icon="ios-search" @click="onSearch">{{$t('m.adZoneSearch.search')}}</Button>
+    <Button style="margin-left:25px;height:40px" type="primary" icon="ios-search" @click="onSearch">{{$t('m.adZoneSearch.search')}}</Button>
   </Form>
 </template>
 

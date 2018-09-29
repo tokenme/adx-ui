@@ -129,4 +129,8 @@ export default {
     .num{
         color: #53a11f;
     }
+    .nav-text{
+        width: 100%;
+        text-align: center
+    }
 </style>

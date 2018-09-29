@@ -13,13 +13,13 @@
       <p slot="title">
         {{$t('m.adZoneTable.adZoneList')}}
       </p>
-      <p style="width:823px;height:182px">
-        <Carousel  :v-model="0" loop>
+      <p style="width:100%">
+        <Carousel  :v-model="0" loop style="width:100%">
           <CarouselItem>
-              <img style="width:823px" src="https://static.tianxi100.com/tmm/adx/bt.jpg" alt="">
+              <img style="width:100%" src="https://static.tianxi100.com/tmm/adx/bt.jpg" alt="">
           </CarouselItem>
           <CarouselItem>
-              <img style="width:823px" src="https://static.tianxi100.com/tmm/adx/us.jpg" alt="">
+              <img style="width:100%" src="https://static.tianxi100.com/tmm/adx/us.jpg" alt="">
           </CarouselItem>
         </Carousel>
       </p>

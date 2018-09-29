@@ -1,6 +1,7 @@
 <template>
+<div>
+  <p style="font-size:16px;text-align:center;width:100%;margin-top:200px" v-if="user.is_airdrop_publisher === 0">{{$t('m.navtitle.apply')}}~</p>
   <v-container fluid fill-height class="px-0 pt-0" style="overflow-y:hidden;height:600px">
-    <p style="font-size:16px;margin-left:550px;width:100%" v-if="user.is_airdrop_publisher === 0">{{$t('m.navtitle.apply')}}~</p>
     <v-dialog v-model="applyAirdropDialog" >
       <v-card style="background:#fff">
         <v-card-title class="headline">{{ $t('m.newAirdrops.apply_airdrop_title') }}</v-card-title>
@@ -51,6 +52,7 @@
       </template>
     </loadmore>
   </v-container>
+</div>
 </template>
 
 <script>
@@ -107,7 +109,6 @@
         this.getAirdrops(() => { this.$refs.loadmore.onTopLoaded(id) })
       },
       bottomRefresh(id) {
-        console.log('bottomRefreshed')
         this.queryParams.page += 1
         this.getAirdrops(() => { this.$refs.loadmore.onBottomLoaded(id) })
         //this.allLoaded = true;
@@ -121,10 +122,10 @@
         }, err => {
           this.toggleLoading(false)
           if (err.code === 401) {
-            this.$router.push({
-              name: 'login'
-            })
-            return
+            // this.$router.push({
+            //   name: 'login'
+            // })
+            // return
           }
           this.showErrorDialog({ title: this.$t('m.newAirdrops.failed_title'), message: err.message })
           if (cb) {

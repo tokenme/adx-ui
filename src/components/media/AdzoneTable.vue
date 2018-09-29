@@ -215,7 +215,6 @@
         }
       },
       onAdzoneClick(row) {
-        console.log(row)
         this.$router.push({
           path: '/private-auctions',
           query: {
